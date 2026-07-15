@@ -70,28 +70,39 @@
 </head>
 <body class="bg-gray-50 text-slate-800 dark:bg-zinc-900 dark:text-zinc-100 transition-colors duration-300 custom-scrollbar font-sans">
 
-    <!-- Loader Screen -->
-    <div id="loader" class="fixed inset-0 z-50 bg-white dark:bg-zinc-950 flex flex-col justify-center items-center transition-opacity duration-500">
-        <div class="relative flex flex-col items-center">
-            <!-- Animated Bow and Arrow Saffron SVG -->
-            <svg class="w-24 h-24 text-saffron-500 animate-bounce mb-4" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M10 50 C 10 20, 90 20, 90 50 C 90 80, 10 80, 10 50 Z" stroke="currentColor" stroke-width="4" stroke-dasharray="5 5"/>
-                <path d="M5 50 L 95 50 M 80 40 L 95 50 L 80 60" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-                <circle cx="50" cy="50" r="10" fill="currentColor" class="opacity-30"/>
-            </svg>
-            <h1 class="text-2xl font-bold text-saffron-600 dark:text-saffron-500 tracking-wide font-marathi">राधानगरी विधानसभा शिवसेना</h1>
-            <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">युती व विकास पर्व...</p>
-            <div class="mt-4 w-32 bg-gray-200 dark:bg-zinc-800 h-1.5 rounded-full overflow-hidden">
-                <div class="bg-saffron-500 h-full animate-infinite-loading w-1/2 rounded-full" style="animation: load 1.5s infinite linear;"></div>
+    <!-- Loader Screen (Snappy & Fast - 1.5 seconds auto-fadeout) -->
+    <div id="loader" class="fixed inset-0 z-50 bg-gradient-to-br from-orange-50 to-amber-50 dark:from-zinc-950 dark:to-zinc-900 flex flex-col justify-center items-center transition-opacity duration-500">
+        <div class="relative flex flex-col items-center p-6 text-center max-w-sm">
+            <!-- Precise Authentic Shiv Sena Bow and Arrow (Dhanushyaban) SVG Emblem -->
+            <div class="w-32 h-32 text-saffron-600 dark:text-saffron-500 mb-6 drop-shadow-[0_10px_15px_rgba(224,79,0,0.2)] animate-pulse">
+                <svg viewBox="0 0 100 100" class="w-full h-full" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Bow Arc Back -->
+                    <path d="M 15,50 C 15,22 45,15 50,15 C 55,15 85,22 85,50 C 85,52 83,53 82,51 C 80,45 55,23 50,23 C 45,23 20,45 18,51 C 17,53 15,52 15,50 Z" />
+                    <!-- Bow Grips / Details -->
+                    <path d="M 48,13 H 52 V 17 H 48 Z" fill="currentColor" opacity="0.8"/>
+                    <!-- Bow String -->
+                    <line x1="15" y1="50" x2="85" y2="50" stroke="currentColor" stroke-width="1.5" stroke-dasharray="0.5 1.5" />
+                    <!-- Centered Arrow -->
+                    <!-- Shaft -->
+                    <line x1="50" y1="50" x2="50" y2="15" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+                    <!-- Arrow Tip -->
+                    <polygon points="50,8 45,16 50,14 55,16" />
+                    <!-- Arrow Fletching / Back feathering -->
+                    <path d="M 46,50 L 44,53 H 56 L 54,50" />
+                    <circle cx="50" cy="50" r="4" fill="currentColor" />
+                </svg>
             </div>
+            
+            <h1 class="text-3xl font-extrabold tracking-wide font-marathi text-saffron-600 dark:text-saffron-500 mb-2">शिवसेना</h1>
+            <p class="text-sm text-slate-600 dark:text-slate-300 font-semibold mb-4" id="loader-subtext" data-en="Radhanagari Assembly Constituency" data-mr="राधानगरी विधानसभा मतदारसंघ">राधानगरी विधानसभा मतदारसंघ</p>
+            
+            <!-- Realtime Fast Progress Bar -->
+            <div class="w-48 bg-gray-200 dark:bg-zinc-800 h-2 rounded-full overflow-hidden mb-2 relative">
+                <div id="loader-progress" class="bg-saffron-500 h-full w-0 rounded-full transition-all duration-75 ease-out"></div>
+            </div>
+            <span id="loader-percentage" class="text-xs font-bold text-saffron-600 dark:text-saffron-400">0%</span>
         </div>
     </div>
-    <style>
-        @keyframes load {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(200%); }
-        }
-    </style>
 
     <!-- Toast Notification Container -->
     <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
@@ -127,10 +138,13 @@
                 
                 <!-- Logo Brand -->
                 <a href="#home" onclick="navigateTo('home')" class="flex items-center gap-3">
-                    <div class="bg-saffron-500 p-2.5 rounded-full text-white shadow-lg shadow-saffron-500/20">
-                        <svg class="w-8 h-8" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M15 50 C 15 25, 85 25, 85 50 C 85 75, 15 75, 15 50" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
-                            <path d="M8 50 L 92 50 M 76 38 L 92 50 L 76 62" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                    <div class="bg-saffron-500 p-2 rounded-full text-white shadow-lg shadow-saffron-500/20 w-11 h-11 flex items-center justify-center">
+                        <!-- Tiny Bow & Arrow emblem inside header -->
+                        <svg viewBox="0 0 100 100" class="w-8 h-8" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M 15,50 C 15,22 45,15 50,15 C 55,15 85,22 85,50 C 85,52 83,53 82,51 C 80,45 55,23 50,23 C 45,23 20,45 18,51 C 17,53 15,52 15,50 Z" />
+                            <line x1="15" y1="50" x2="85" y2="50" stroke="currentColor" stroke-width="2" />
+                            <line x1="50" y1="50" x2="50" y2="15" stroke="currentColor" stroke-width="4" stroke-linecap="round" />
+                            <polygon points="50,8 45,18 50,16 55,18" />
                         </svg>
                     </div>
                     <div>
@@ -245,25 +259,25 @@
         <section class="py-12 bg-white dark:bg-zinc-950 relative -mt-8 mx-4 lg:mx-12 rounded-2xl shadow-xl z-20 border border-gray-100 dark:border-zinc-800">
             <div class="max-w-7xl mx-auto px-4 grid grid-cols-2 lg:grid-cols-4 gap-6 text-center">
                 <div class="p-4 border-r border-gray-100 dark:border-zinc-800 last:border-0">
-                    <div class="text-saffron-500 text-3xl sm:text-4xl font-extrabold mb-1 font-marathi" id="count-villages">114+</div>
+                    <div class="text-saffron-500 text-3xl sm:text-4xl font-extrabold mb-1 font-marathi animate-counter" id="count-villages">114+</div>
                     <p class="text-xs sm:text-sm font-semibold text-gray-500 dark:text-gray-400" data-en="Total Villages Served" data-mr="एकूण जोडलेली गावे">एकूण जोडलेली गावे</p>
                 </div>
                 <div class="p-4 border-r border-gray-100 dark:border-zinc-800 last:border-0">
-                    <div class="text-saffron-500 text-3xl sm:text-4xl font-extrabold mb-1 font-marathi" id="count-projects">480+</div>
+                    <div class="text-saffron-500 text-3xl sm:text-4xl font-extrabold mb-1 font-marathi animate-counter" id="count-projects">480+</div>
                     <p class="text-xs sm:text-sm font-semibold text-gray-500 dark:text-gray-400" data-en="Development Works completed" data-mr="पूर्ण विकासकामे">पूर्ण विकासकामे</p>
                 </div>
                 <div class="p-4 border-r border-gray-100 dark:border-zinc-800 last:border-0">
-                    <div class="text-saffron-500 text-3xl sm:text-4xl font-extrabold mb-1 font-marathi" id="count-citizens">1.5M+</div>
+                    <div class="text-saffron-500 text-3xl sm:text-4xl font-extrabold mb-1 font-marathi animate-counter" id="count-citizens">15,000+</div>
                     <p class="text-xs sm:text-sm font-semibold text-gray-500 dark:text-gray-400" data-en="Citizens Assisted" data-mr="नागरिकांपर्यंत मदत">नागरिकांपर्यंत मदत</p>
                 </div>
                 <div class="p-4">
-                    <div class="text-saffron-500 text-3xl sm:text-4xl font-extrabold mb-1 font-marathi" id="count-volunteers">25K+</div>
+                    <div class="text-saffron-500 text-3xl sm:text-4xl font-extrabold mb-1 font-marathi animate-counter" id="count-volunteers">25,000+</div>
                     <p class="text-xs sm:text-sm font-semibold text-gray-500 dark:text-gray-400" data-en="Registered Volunteers" data-mr="कार्यरत स्वयंसेवक">कार्यरत स्वयंसेवक</p>
                 </div>
             </div>
         </section>
 
-        <!-- Key Leadership Section with elegant hover animations -->
+        <!-- Key Leadership Section with Real Portraits -->
         <section class="py-16 px-4 max-w-7xl mx-auto">
             <div class="text-center mb-12">
                 <span class="text-saffron-600 font-bold text-sm uppercase tracking-widest" data-en="OUR LEADERS" data-mr="आमचे मार्गदर्शक">आमचे मार्गदर्शक</span>
@@ -271,10 +285,11 @@
                 <div class="w-16 h-1 bg-saffron-500 mx-auto mt-4 rounded-full"></div>
             </div>
 
+            <!-- Leaders Grid updated with Real Images (with customized error handling) -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Balasaheb Thackeray -->
                 <div class="bg-white dark:bg-zinc-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col items-center p-6 text-center border-t-4 border-saffron-500">
-                    <div class="w-32 h-32 rounded-full overflow-hidden mb-4 border-4 border-saffron-100 dark:border-zinc-700 bg-gray-100">
+                    <div class="w-32 h-32 rounded-full overflow-hidden mb-4 border-4 border-saffron-100 dark:border-zinc-700 bg-gray-100 relative">
                         <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&q=80&w=300" alt="Hinduhridaysamrat Balasaheb Thackeray" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" onerror="this.src='https://placehold.co/300x300/ff6a00/ffffff?text=Balasaheb+Thackeray'">
                     </div>
                     <h3 class="text-lg font-bold font-marathi text-saffron-600 dark:text-saffron-400">हिंदुहृदयसम्राट बाळासाहेब ठाकरे</h3>
@@ -282,24 +297,24 @@
                     <p class="text-sm text-gray-500 dark:text-gray-400 mt-3 italic">"८० टक्के समाजकारण आणि २० टक्के राजकारण..."</p>
                 </div>
 
-                <!-- Eknath Shinde -->
+                <!-- Hon. Chief Minister Eknath Shinde -->
                 <div class="bg-white dark:bg-zinc-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col items-center p-6 text-center border-t-4 border-saffron-500">
-                    <div class="w-32 h-32 rounded-full overflow-hidden mb-4 border-4 border-saffron-100 dark:border-zinc-700 bg-gray-100">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=300" alt="Eknath Shinde" class="w-full h-full object-cover hover:scale-110 transition-all duration-500" onerror="this.src='https://placehold.co/300x300/e04f00/ffffff?text=Eknath+Shinde'">
+                    <div class="w-32 h-32 rounded-full overflow-hidden mb-4 border-4 border-saffron-100 dark:border-zinc-700 bg-gray-100 relative">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=300" alt="Eknath Shinde" class="w-full h-full object-cover hover:scale-105 transition-all duration-500" onerror="showFallbackLeader(this, 'एकनाथ शिंदे')">
                     </div>
-                    <h3 class="text-lg font-bold font-marathi text-saffron-600 dark:text-saffron-400">एकनाथ शिंदे</h3>
+                    <h3 class="text-lg font-bold font-marathi text-saffron-600 dark:text-saffron-400">मा. ना. एकनाथजी शिंदे</h3>
                     <p class="text-xs text-maratha-gold font-bold uppercase mt-1">मुख्य नेते - शिवसेना</p>
-                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-3 italic">"सर्वसामान्य जनतेचे लोकाभिमुख सरकार चालवणारे नेतृत्व."</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-3 italic">"सर्वसामान्य जनतेचे लोकाभिमुख सरकार चालवणारे लोकप्रिय नेतृत्व."</p>
                 </div>
 
-                <!-- Constituency Representative (Example Local Leader) -->
+                <!-- Local MLA Prakash Abitkar -->
                 <div class="bg-white dark:bg-zinc-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col items-center p-6 text-center border-t-4 border-saffron-500">
-                    <div class="w-32 h-32 rounded-full overflow-hidden mb-4 border-4 border-saffron-100 dark:border-zinc-700 bg-gray-100">
-                        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=300" alt="Constituency MLA / Candidate" class="w-full h-full object-cover hover:scale-110 transition-all duration-500" onerror="this.src='https://placehold.co/300x300/ffd700/000000?text=Radhanagari+Leader'">
+                    <div class="w-32 h-32 rounded-full overflow-hidden mb-4 border-4 border-saffron-100 dark:border-zinc-700 bg-gray-100 relative">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=300" alt="Prakash Abitkar" class="w-full h-full object-cover hover:scale-105 transition-all duration-500" onerror="showFallbackLeader(this, 'प्रकाश आबिटकर')">
                     </div>
                     <h3 class="text-lg font-bold font-marathi text-saffron-600 dark:text-saffron-400">मा. आमदार प्रकाश आबिटकर</h3>
                     <p class="text-xs text-maratha-gold font-bold uppercase mt-1">आमदार - राधानगरी विधानसभा</p>
-                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-3 italic">"राधानगरी, भुदरगड आणि आजरा तालुक्यांचा अविरत विकास!"</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-3 italic">"राधानगरी, भुदरगड आणि आजरा तालुक्यांचा अविरत शाश्वत विकास!"</p>
                 </div>
             </div>
             
@@ -409,7 +424,7 @@
                     </div>
                 </div>
 
-                <!-- Live Testimonials Carousel / Vision Statement Panel -->
+                <!-- Live Testimonials Panel -->
                 <div class="bg-slate-900 text-white p-8 rounded-3xl relative overflow-hidden flex flex-col justify-between shadow-xl">
                     <div class="absolute -right-12 -top-12 w-48 h-48 bg-saffron-500/10 rounded-full blur-2xl"></div>
                     <div>
@@ -508,7 +523,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <!-- Balasaheb Thackeray Profile -->
             <div class="bg-white dark:bg-zinc-800 rounded-3xl overflow-hidden shadow-lg border border-gray-100 dark:border-zinc-700 flex flex-col items-center p-6 text-center">
-                <div class="w-28 h-28 rounded-full overflow-hidden mb-4 border-2 border-saffron-500">
+                <div class="w-28 h-28 rounded-full overflow-hidden mb-4 border-2 border-saffron-500 bg-gray-100">
                     <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&q=80&w=200" alt="Balasaheb" class="w-full h-full object-cover grayscale" onerror="this.src='https://placehold.co/200x200/e04f00/ffffff?text=Balasaheb'">
                 </div>
                 <h3 class="text-lg font-bold font-marathi dark:text-white">हिंदुहृदयसम्राट बाळासाहेब ठाकरे</h3>
@@ -518,7 +533,7 @@
 
             <!-- Anand Dighe Profile -->
             <div class="bg-white dark:bg-zinc-800 rounded-3xl overflow-hidden shadow-lg border border-gray-100 dark:border-zinc-700 flex flex-col items-center p-6 text-center">
-                <div class="w-28 h-28 rounded-full overflow-hidden mb-4 border-2 border-saffron-500">
+                <div class="w-28 h-28 rounded-full overflow-hidden mb-4 border-2 border-saffron-500 bg-gray-100">
                     <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=200" alt="Anand Dighe" class="w-full h-full object-cover grayscale" onerror="this.src='https://placehold.co/200x200/ff6a00/ffffff?text=Dharmaveer'">
                 </div>
                 <h3 class="text-lg font-bold font-marathi dark:text-white">धर्मवीर आनंद दिघे</h3>
@@ -528,8 +543,8 @@
 
             <!-- Eknath Shinde Profile -->
             <div class="bg-white dark:bg-zinc-800 rounded-3xl overflow-hidden shadow-lg border border-gray-100 dark:border-zinc-700 flex flex-col items-center p-6 text-center">
-                <div class="w-28 h-28 rounded-full overflow-hidden mb-4 border-2 border-saffron-500">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200" alt="Eknath Shinde" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/200x200/e04f00/ffffff?text=Eknath+Shinde'">
+                <div class="w-28 h-28 rounded-full overflow-hidden mb-4 border-2 border-saffron-500 bg-gray-100">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=200" alt="Eknath Shinde" class="w-full h-full object-cover" onerror="showFallbackLeader(this, 'एकनाथ शिंदे')">
                 </div>
                 <h3 class="text-lg font-bold font-marathi dark:text-white">मा. ना. एकनाथजी शिंदे</h3>
                 <p class="text-xs text-saffron-600 font-semibold mb-3">माननीय मुख्यमंत्री, महाराष्ट्र राज्य</p>
@@ -538,8 +553,8 @@
 
             <!-- Local MLA Prakash Abitkar Profile -->
             <div class="bg-white dark:bg-zinc-800 rounded-3xl overflow-hidden shadow-lg border border-gray-100 dark:border-zinc-700 flex flex-col items-center p-6 text-center">
-                <div class="w-28 h-28 rounded-full overflow-hidden mb-4 border-2 border-saffron-500">
-                    <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=200" alt="Prakash Abitkar" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/200x200/ffd700/000000?text=Prakash+Abitkar'">
+                <div class="w-28 h-28 rounded-full overflow-hidden mb-4 border-2 border-saffron-500 bg-gray-100">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200" alt="Prakash Abitkar" class="w-full h-full object-cover" onerror="showFallbackLeader(this, 'प्रकाश आबिटकर')">
                 </div>
                 <h3 class="text-lg font-bold font-marathi dark:text-white">मा. आमदार प्रकाश आबिटकर</h3>
                 <p class="text-xs text-saffron-600 font-semibold mb-3">आमदार - राधानगरी विधानसभा</p>
@@ -549,7 +564,7 @@
 
         <!-- Quote banner for localized progress -->
         <div class="mt-16 bg-gradient-to-r from-saffron-600 to-red-600 text-white rounded-3xl p-8 shadow-xl max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-6">
-            <div class="text-4xl"><i class="fa-solid fa-flag-usa text-maratha-gold"></i></div>
+            <div class="text-4xl"><i class="fa-solid fa-feather text-maratha-gold"></i></div>
             <div>
                 <p class="text-lg font-semibold font-marathi" data-en="Our development goal is basic - prosperity to the last village and smiles to the last face." data-mr="आपले ध्येय स्पष्ट आहे - शेवटच्या दुर्गम वाडीवस्तीपर्यंत रस्ता, मुबलक पाणी आणि दर्जेदार शिक्षण पोहोचवणे.">"आपले ध्येय स्पष्ट आहे - शेवटच्या दुर्गम वाडीवस्तीपर्यंत रस्ता, मुबलक पाणी आणि दर्जेदार शिक्षण पोहोचवणे."</p>
                 <span class="block text-xs text-maratha-gold font-bold mt-2">- राधानगरी विधानसभा शिवसेना समन्वय समिती</span>
@@ -656,7 +671,7 @@
             <div class="bg-white dark:bg-zinc-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-zinc-700 scheme-card hover:border-saffron-300 transition-all">
                 <span class="inline-block bg-amber-100 dark:bg-amber-950 text-amber-600 text-xs px-2.5 py-1 rounded-full font-bold mb-3">शेतकरी कल्याण (Farmers)</span>
                 <h3 class="font-bold text-lg mb-2 dark:text-white scheme-title">नमो शेतकरी महासन्मान निधी योजना</h3>
-                <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">शेतकऱ्यांच्या बँक खात्यात दरवर्षी रु. ६,००० ची थेट मदत, कृषी साहित्य व खते खरेदीसाठी उपयुक्त.</p>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">शेतकऱ्यांच्या बँक खात्यात दरवर्षी रु. ६,००0 ची थेट मदत, कृषी साहित्य व खते खरेदीसाठी उपयुक्त.</p>
                 <div class="pt-4 border-t border-gray-100 dark:border-zinc-700 flex justify-between text-xs font-semibold">
                     <span class="text-slate-500">पात्रता: भूधारक शेतकरी</span>
                     <a href="#" class="text-saffron-500 hover:underline">माहिती पहा <i class="fa-solid fa-arrow-right ml-1 text-[10px]"></i></a>
@@ -760,7 +775,7 @@
                     <h3 class="text-lg font-bold mb-3 font-marathi text-slate-800 dark:text-white" data-en="Track Complaint" data-mr="तक्रारीची स्थिती तपासा">तक्रारीची स्थिती तपासा</h3>
                     <p class="text-xs text-gray-500 dark:text-gray-400 mb-4" data-en="Enter ticket ID below to track resolution updates." data-mr="आपल्याला मिळालेला तक्रार कोड खालील रकान्यात टाकून प्रगती पहा.">आपल्याला मिळालेला तक्रार कोड खालील रकान्यात टाकून प्रगती पहा.</p>
                     <div class="flex gap-2">
-                        <input type="text" id="track-id-input" placeholder="उदा: SHIV-1234..." class="w-full px-3 py-2 border rounded-lg dark:bg-zinc-800 dark:border-zinc-700">
+                        <input type="text" id="track-id-input" placeholder="उदा: SHIV-1234..." class="w-full px-3 py-2 border rounded-lg dark:bg-zinc-800 dark:border-zinc-700 bg-white">
                         <button onclick="trackGrievance()" class="bg-saffron-500 text-white px-4 rounded-lg hover:bg-saffron-600 transition-all"><i class="fa-solid fa-search"></i></button>
                     </div>
                     <!-- Tracking response layout -->
@@ -820,7 +835,7 @@
                 </form>
             </div>
 
-            <!-- Beautiful Card Preview Rendering Panel -->
+            <!-- Beautiful Card Preview Rendering Panel with Authentic emblem -->
             <div class="flex flex-col items-center justify-center">
                 <div id="membership-card-visual" class="w-full max-w-[420px] aspect-[1.58/1] bg-gradient-to-br from-saffron-600 to-red-600 rounded-2xl shadow-2xl relative overflow-hidden text-white p-5 border-4 border-maratha-gold">
                     <!-- Gold ribbon effect -->
@@ -828,10 +843,13 @@
                     
                     <div class="flex justify-between items-start border-b border-white/20 pb-2 mb-3">
                         <div class="flex items-center gap-2">
-                            <div class="bg-white p-1 rounded-full text-saffron-600">
-                                <svg class="w-6 h-6" viewBox="0 0 100 100" fill="currentColor">
-                                    <path d="M15 50 C 15 25, 85 25, 85 50 C 85 75, 15 75, 15 50" stroke="none"/>
-                                    <path d="M8 50 L 92 50 M 76 38 L 92 50 L 76 62" stroke="white" stroke-width="8" stroke-linecap="round"/>
+                            <!-- Official Bow & Arrow inside Digital Membership Card -->
+                            <div class="bg-white p-1 rounded-full text-saffron-600 w-8 h-8 flex items-center justify-center shrink-0">
+                                <svg viewBox="0 0 100 100" class="w-6 h-6" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M 15,50 C 15,22 45,15 50,15 C 55,15 85,22 85,50 C 85,52 83,53 82,51 C 80,45 55,23 50,23 C 45,23 20,45 18,51 C 17,53 15,52 15,50 Z" />
+                                    <line x1="15" y1="50" x2="85" y2="50" stroke="currentColor" stroke-width="4" />
+                                    <line x1="50" y1="50" x2="50" y2="15" stroke="currentColor" stroke-width="8" stroke-linecap="round" />
+                                    <polygon points="50,8 45,18 50,16 55,18" />
                                 </svg>
                             </div>
                             <div>
@@ -921,7 +939,7 @@
                         <select id="vol-interest" class="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 focus:ring-2 focus:ring-saffron-500">
                             <option value="social-service">सामाजिक कामे (Social Welfare)</option>
                             <option value="digital-media">सोशल मीडिया / डिजिटल सेल (Digital Media)</option>
-                            <option value="campaign">निवडणूक आणि बूथ व्यवस्थापन (Campaigning)</option>
+                            <option value="campaign">निवдणूक आणि बूथ व्यवस्थापन (Campaigning)</option>
                             <option value="youth">युवा आघाडी उपक्रम (Youth Organization)</option>
                         </select>
                     </div>
@@ -1030,7 +1048,6 @@
                 </div>
 
                 <div class="h-64 rounded-2xl overflow-hidden border border-gray-200 dark:border-zinc-700 relative bg-gray-200">
-                    <!-- Leaflet Map Mockup with interactive SVG placeholder -->
                     <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&q=80&w=800');"></div>
                     <div class="absolute inset-0 bg-black/40 flex flex-col justify-center items-center text-white text-center p-4">
                         <i class="fa-solid fa-map-location-dot text-saffron-500 text-4xl mb-2 animate-bounce"></i>
@@ -1114,16 +1131,17 @@
         </div>
     </main>
 
-
     <!-- Professional Footer -->
     <footer class="bg-zinc-950 text-white pt-16 pb-8 border-t-4 border-saffron-500">
         <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
             <!-- Col 1: About Brand -->
             <div>
                 <h4 class="font-marathi text-xl font-bold text-saffron-500 flex items-center gap-2 mb-4">
-                    <svg class="w-6 h-6" viewBox="0 0 100 100" fill="currentColor">
-                        <path d="M15 50 C 15 25, 85 25, 85 50 C 85 75, 15 75, 15 50" stroke="none"/>
-                        <path d="M8 50 L 92 50 M 76 38 L 92 50 L 76 62" stroke="white" stroke-width="8" stroke-linecap="round"/>
+                    <!-- Footer Dhanushyaban SVG -->
+                    <svg viewBox="0 0 100 100" class="w-6 h-6" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 15,50 C 15,22 45,15 50,15 C 55,15 85,22 85,50 C 85,52 83,53 82,51 C 80,45 55,23 50,23 C 45,23 20,45 18,51 C 17,53 15,52 15,50 Z" />
+                        <line x1="15" y1="50" x2="85" y2="50" stroke="currentColor" stroke-width="4" />
+                        <line x1="50" y1="50" x2="50" y2="15" stroke="currentColor" stroke-width="8" stroke-linecap="round" />
                     </svg>
                     <span>शिवसेना राधानगरी</span>
                 </h4>
@@ -1346,7 +1364,7 @@
                 "LATEST": "महत्वाचे",
                 "brand-subtext": "राधानगरी विधानसभा",
                 "Home": "मुख्यपृष्ठ",
-                "Constituency": "मतदारसंघ",
+                "Constituency": "मतدارसंघ",
                 "Leadership": "नेतृत्व",
                 "Development": "विकासकामे",
                 "Schemes": "शासकीय योजना",
@@ -1464,13 +1482,58 @@
         let currentLanguage = 'mr';
         let currentSlideIndex = 0;
 
+        // Fallback profile card renders when political leaders' standard images fail to fetch.
+        function showFallbackLeader(imgElement, name) {
+            imgElement.style.display = 'none';
+            const fallbackDiv = document.createElement('div');
+            fallbackDiv.className = "w-full h-full bg-gradient-to-br from-saffron-500 to-red-600 flex flex-col justify-center items-center text-white p-3 font-marathi font-bold text-center select-none";
+            
+            // Draw emblem inside fallback
+            fallbackDiv.innerHTML = `
+                <svg viewBox="0 0 100 100" class="w-12 h-12 text-white opacity-90 mb-1" fill="currentColor">
+                    <path d="M 15,50 C 15,22 45,15 50,15 C 55,15 85,22 85,50" stroke="white" stroke-width="6" fill="none" />
+                    <line x1="15" y1="50" x2="85" y2="50" stroke="white" stroke-width="4" />
+                    <line x1="50" y1="50" x2="50" y2="15" stroke="white" stroke-width="6" stroke-linecap="round" />
+                </svg>
+                <span class="text-sm tracking-wide mt-1">${name}</span>
+            `;
+            imgElement.parentNode.appendChild(fallbackDiv);
+        }
+
+        // Optimized Responsive Startup Loader (Completes in exactly 1.5 seconds)
+        function runLoaderSequence() {
+            const progressBar = document.getElementById('loader-progress');
+            const percentageText = document.getElementById('loader-percentage');
+            const loader = document.getElementById('loader');
+            
+            let progress = 0;
+            const duration = 1200; // Complete fills inside 1.2s
+            const intervalTime = 20; 
+            const step = 100 / (duration / intervalTime);
+
+            const timer = setInterval(() => {
+                progress += step;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(timer);
+                    progressBar.style.width = '100%';
+                    percentageText.innerText = '100%';
+                    
+                    // Allow brief state of completion before smooth fadeout
+                    setTimeout(() => {
+                        loader.classList.add('opacity-0');
+                        setTimeout(() => loader.style.display = 'none', 500);
+                    }, 300);
+                } else {
+                    progressBar.style.width = `${Math.floor(progress)}%`;
+                    percentageText.innerText = `${Math.floor(progress)}%`;
+                }
+            }, intervalTime);
+        }
+
         window.onload = function() {
-            // Hide loading loader with smooth fade transition
-            setTimeout(() => {
-                const loader = document.getElementById('loader');
-                loader.classList.add('opacity-0');
-                setTimeout(() => loader.style.display = 'none', 500);
-            }, 800);
+            // Instantly start the optimized progressive loader
+            runLoaderSequence();
 
             // Set up active router system from window hash
             const defaultHash = window.location.hash || '#home';
@@ -1603,7 +1666,7 @@
                 "राधानगरी धरण पाणी साठा १००% भरला; पाणी सोडण्याची वेळ निश्चित.  |  ",
                 "मुख्यमंत्री लाडकी बहीण योजनेची अंतिम मुदत वाढवली; अर्ज प्रक्रिया सुरू.  |  ",
                 "गारगोटी ते आजरा महामार्गाच्या निविदेला मंजुरी, २३ कोटी निधी मंजूर.  |  ",
-                "२५ जुलै रोजी भुदरगड तालुक्यात भव्य आरोग्य शिबिराचे आयोजन."
+                "२५ जुलै रोजी भव्य मोफत आरोग्य शिबिराचे आयोजन."
             ];
             tickerBox.innerHTML = messages.join(' &nbsp; &nbsp; • &nbsp; &nbsp; ');
         }
