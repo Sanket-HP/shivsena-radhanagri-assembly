@@ -1,0 +1,1908 @@
+<!DOCTYPE html>
+<html lang="mr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>शिवसेना - राधानगरी विधानसभा | Shiv Sena - Radhanagari Vidhansabha</title>
+    
+    <!-- TailWind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        saffron: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            500: '#ff6a00',
+                            600: '#e04f00',
+                            700: '#b83800',
+                            900: '#7c1f00',
+                        },
+                        maratha: {
+                            gold: '#ffd700',
+                            dark: '#1a1a1a',
+                            slate: '#2d3748'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        marathi: ['Yatra One', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Yatra+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- CSS Custom Styling for transitions & components -->
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.05);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e04f00;
+            border-radius: 10px;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(224,79,0,0.95) 0%, rgba(26,26,26,0.9) 100%);
+        }
+        .text-stroke {
+            -webkit-text-stroke: 1px rgba(255,255,255,0.3);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-slate-800 dark:bg-zinc-900 dark:text-zinc-100 transition-colors duration-300 custom-scrollbar font-sans">
+
+    <!-- Loader Screen -->
+    <div id="loader" class="fixed inset-0 z-50 bg-white dark:bg-zinc-950 flex flex-col justify-center items-center transition-opacity duration-500">
+        <div class="relative flex flex-col items-center">
+            <!-- Animated Bow and Arrow Saffron SVG -->
+            <svg class="w-24 h-24 text-saffron-500 animate-bounce mb-4" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 50 C 10 20, 90 20, 90 50 C 90 80, 10 80, 10 50 Z" stroke="currentColor" stroke-width="4" stroke-dasharray="5 5"/>
+                <path d="M5 50 L 95 50 M 80 40 L 95 50 L 80 60" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="50" cy="50" r="10" fill="currentColor" class="opacity-30"/>
+            </svg>
+            <h1 class="text-2xl font-bold text-saffron-600 dark:text-saffron-500 tracking-wide font-marathi">राधानगरी विधानसभा शिवसेना</h1>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">युती व विकास पर्व...</p>
+            <div class="mt-4 w-32 bg-gray-200 dark:bg-zinc-800 h-1.5 rounded-full overflow-hidden">
+                <div class="bg-saffron-500 h-full animate-infinite-loading w-1/2 rounded-full" style="animation: load 1.5s infinite linear;"></div>
+            </div>
+        </div>
+    </div>
+    <style>
+        @keyframes load {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(200%); }
+        }
+    </style>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- Live Event/Announcement Ticker -->
+    <div class="bg-saffron-600 text-white py-1.5 px-4 text-xs md:text-sm font-medium overflow-hidden relative z-40 shadow-md">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <span class="bg-maratha-gold text-slate-900 font-bold px-2 py-0.5 rounded text-[11px] mr-2 uppercase shrink-0" data-en="LATEST" data-mr="महत्वाचे">महत्वाचे</span>
+            <div class="overflow-hidden relative w-full h-5">
+                <div class="absolute whitespace-nowrap animate-marquee flex gap-12" id="news-ticker-text">
+                    <!-- Dynamic updates populated in JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .animate-marquee {
+            animation: marquee 25s linear infinite;
+        }
+        .animate-marquee:hover {
+            animation-play-state: paused;
+        }
+    </style>
+
+    <!-- Main Navigation Header -->
+    <header class="sticky top-0 z-30 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-md border-b border-gray-200 dark:border-zinc-800 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo Brand -->
+                <a href="#home" onclick="navigateTo('home')" class="flex items-center gap-3">
+                    <div class="bg-saffron-500 p-2.5 rounded-full text-white shadow-lg shadow-saffron-500/20">
+                        <svg class="w-8 h-8" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 50 C 15 25, 85 25, 85 50 C 85 75, 15 75, 15 50" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+                            <path d="M8 50 L 92 50 M 76 38 L 92 50 L 76 62" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="font-marathi text-xl md:text-2xl font-bold leading-tight tracking-wide text-saffron-600 dark:text-saffron-500">शिवसेना</div>
+                        <div class="text-[10px] md:text-xs font-semibold tracking-wider uppercase text-slate-500 dark:text-gray-400" id="brand-subtext" data-en="RADHANAGARI ASSEMBLY" data-mr="राधानगरी विधानसभा">राधानगरी विधानसभा</div>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav Navigation Links -->
+                <nav class="hidden xl:flex items-center gap-1.5">
+                    <a href="#home" onclick="navigateTo('home')" class="nav-link px-3 py-2 rounded-lg text-sm font-semibold transition-all hover:bg-saffron-50 hover:text-saffron-600 dark:hover:bg-zinc-900 dark:hover:text-saffron-400 active-nav" data-en="Home" data-mr="मुख्यपृष्ठ">मुख्यपृष्ठ</a>
+                    <a href="#about" onclick="navigateTo('about')" class="nav-link px-3 py-2 rounded-lg text-sm font-semibold transition-all hover:bg-saffron-50 hover:text-saffron-600 dark:hover:bg-zinc-900 dark:hover:text-saffron-400" data-en="Constituency" data-mr="मतदारसंघ">मतदारसंघ</a>
+                    <a href="#leadership" onclick="navigateTo('leadership')" class="nav-link px-3 py-2 rounded-lg text-sm font-semibold transition-all hover:bg-saffron-50 hover:text-saffron-600 dark:hover:bg-zinc-900 dark:hover:text-saffron-400" data-en="Leadership" data-mr="नेतृत्व">नेतृत्व</a>
+                    <a href="#development" onclick="navigateTo('development')" class="nav-link px-3 py-2 rounded-lg text-sm font-semibold transition-all hover:bg-saffron-50 hover:text-saffron-600 dark:hover:bg-zinc-900 dark:hover:text-saffron-400" data-en="Development" data-mr="विकासकामे">विकासकामे</a>
+                    <a href="#schemes" onclick="navigateTo('schemes')" class="nav-link px-3 py-2 rounded-lg text-sm font-semibold transition-all hover:bg-saffron-50 hover:text-saffron-600 dark:hover:bg-zinc-900 dark:hover:text-saffron-400" data-en="Schemes" data-mr="शासकीय योजना">शासकीय योजना</a>
+                    <a href="#villages" onclick="navigateTo('villages')" class="nav-link px-3 py-2 rounded-lg text-sm font-semibold transition-all hover:bg-saffron-50 hover:text-saffron-600 dark:hover:bg-zinc-900 dark:hover:text-saffron-400" data-en="Villages" data-mr="गावे">गावे</a>
+                    <a href="#complaints" onclick="navigateTo('complaints')" class="nav-link px-3 py-2 rounded-lg text-sm font-semibold transition-all hover:bg-saffron-50 hover:text-saffron-600 dark:hover:bg-zinc-900 dark:hover:text-saffron-400" data-en="Complaint Portal" data-mr="तक्रार निवारण">तक्रार निवारण</a>
+                    <a href="#membership" onclick="navigateTo('membership')" class="nav-link px-3 py-2 rounded-lg text-sm font-semibold bg-saffron-500 text-white hover:bg-saffron-600 shadow-md shadow-saffron-500/10" data-en="Join Us" data-mr="सदस्य व्हा">सदस्य व्हा</a>
+                </nav>
+
+                <!-- Functional Quick Controls (Lang, Dark Mode, Helpline, Mobile Menu) -->
+                <div class="flex items-center gap-2">
+                    <!-- Translation Switcher -->
+                    <button id="lang-switch" class="px-2.5 py-1.5 border border-gray-300 dark:border-zinc-700 rounded-lg text-xs font-bold bg-gray-100 dark:bg-zinc-800 hover:bg-saffron-100 dark:hover:bg-saffron-900/40 transition-all flex items-center gap-1">
+                        <i class="fa-solid fa-language text-sm text-saffron-600"></i>
+                        <span id="lang-label">EN</span>
+                    </button>
+
+                    <!-- Dark Mode Toggle -->
+                    <button id="dark-mode-toggle" class="p-2.5 rounded-lg border border-gray-300 dark:border-zinc-700 bg-gray-100 dark:bg-zinc-800 text-gray-700 dark:text-zinc-300 hover:text-saffron-500 dark:hover:text-saffron-400 transition-all">
+                        <i class="fa-solid fa-moon dark:hidden"></i>
+                        <i class="fa-solid fa-sun hidden dark:inline"></i>
+                    </button>
+
+                    <!-- Mobile Menu Hamburger Trigger -->
+                    <button id="mobile-menu-btn" class="xl:hidden p-2.5 rounded-lg border border-gray-300 dark:border-zinc-700 bg-gray-100 dark:bg-zinc-800 text-gray-700 dark:text-zinc-300">
+                        <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Dynamic Drawer Navigation -->
+        <div id="mobile-menu" class="hidden xl:hidden border-t border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 px-4 py-4 space-y-2 shadow-lg max-h-[80vh] overflow-y-auto">
+            <a href="#home" onclick="navigateTo('home')" class="block px-4 py-2.5 rounded-lg font-medium text-slate-700 dark:text-slate-200 hover:bg-saffron-50 dark:hover:bg-zinc-900" data-en="Home" data-mr="मुख्यपृष्ठ">मुख्यपृष्ठ</a>
+            <a href="#about" onclick="navigateTo('about')" class="block px-4 py-2.5 rounded-lg font-medium text-slate-700 dark:text-slate-200 hover:bg-saffron-50 dark:hover:bg-zinc-900" data-en="Constituency" data-mr="मतदारसंघ">मतदारसंघ</a>
+            <a href="#leadership" onclick="navigateTo('leadership')" class="block px-4 py-2.5 rounded-lg font-medium text-slate-700 dark:text-slate-200 hover:bg-saffron-50 dark:hover:bg-zinc-900" data-en="Leadership" data-mr="नेतृत्व">नेतृत्व</a>
+            <a href="#development" onclick="navigateTo('development')" class="block px-4 py-2.5 rounded-lg font-medium text-slate-700 dark:text-slate-200 hover:bg-saffron-50 dark:hover:bg-zinc-900" data-en="Development Works" data-mr="विकासकामे">विकासकामे</a>
+            <a href="#schemes" onclick="navigateTo('schemes')" class="block px-4 py-2.5 rounded-lg font-medium text-slate-700 dark:text-slate-200 hover:bg-saffron-50 dark:hover:bg-zinc-900" data-en="Gov Schemes" data-mr="शासकीय योजना">शासकीय योजना</a>
+            <a href="#villages" onclick="navigateTo('villages')" class="block px-4 py-2.5 rounded-lg font-medium text-slate-700 dark:text-slate-200 hover:bg-saffron-50 dark:hover:bg-zinc-900" data-en="Villages Directory" data-mr="गावे">गावे</a>
+            <a href="#complaints" onclick="navigateTo('complaints')" class="block px-4 py-2.5 rounded-lg font-medium text-slate-700 dark:text-slate-200 hover:bg-saffron-50 dark:hover:bg-zinc-900" data-en="Citizen Complaint Portal" data-mr="तक्रार निवारण">तक्रार निवारण</a>
+            <a href="#volunteer" onclick="navigateTo('volunteer')" class="block px-4 py-2.5 rounded-lg font-medium text-slate-700 dark:text-slate-200 hover:bg-saffron-50 dark:hover:bg-zinc-900" data-en="Volunteer Registration" data-mr="स्वयंसेवक नोंदणी">स्वयंसेवक नोंदणी</a>
+            <a href="#news" onclick="navigateTo('news')" class="block px-4 py-2.5 rounded-lg font-medium text-slate-700 dark:text-slate-200 hover:bg-saffron-50 dark:hover:bg-zinc-900" data-en="News & Media" data-mr="बातम्या व माध्यम">बातम्या व माध्यम</a>
+            <a href="#gallery" onclick="navigateTo('gallery')" class="block px-4 py-2.5 rounded-lg font-medium text-slate-700 dark:text-slate-200 hover:bg-saffron-50 dark:hover:bg-zinc-900" data-en="Photo Gallery" data-mr="छायाचित्र दालन">छायाचित्र दालन</a>
+            <a href="#contact" onclick="navigateTo('contact')" class="block px-4 py-2.5 rounded-lg font-medium text-slate-700 dark:text-slate-200 hover:bg-saffron-50 dark:hover:bg-zinc-900" data-en="Contact Us" data-mr="संपर्क साधा">संपर्क साधा</a>
+            <a href="#membership" onclick="navigateTo('membership')" class="block px-4 py-3 bg-saffron-500 text-white rounded-lg text-center font-bold" data-en="Join Shiv Sena" data-mr="शिवसेना सदस्य व्हा">शिवसेना सदस्य व्हा</a>
+        </div>
+    </header>
+
+    <style>
+        .active-nav {
+            color: #e04f00 !important;
+            border-bottom: 2px solid #e04f00;
+            border-radius: 0;
+        }
+    </style>
+
+    <!-- VIEW CONTAINER: HOME -->
+    <main id="view-home" class="view-container fade-in">
+        <!-- Hero Dynamic Slider Section -->
+        <section class="relative bg-slate-900 text-white h-[75vh] md:h-[85vh] overflow-hidden">
+            <div id="hero-slider" class="absolute inset-0 w-full h-full">
+                <!-- Slide 1 -->
+                <div class="hero-slide absolute inset-0 opacity-100 transition-opacity duration-1000">
+                    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?auto=format&fit=crop&q=80&w=1920');"></div>
+                    <div class="absolute inset-0 hero-gradient"></div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="hero-slide absolute inset-0 opacity-0 transition-opacity duration-1000">
+                    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1605000797499-95a51c7769ae?auto=format&fit=crop&q=80&w=1920');"></div>
+                    <div class="absolute inset-0 hero-gradient"></div>
+                </div>
+            </div>
+
+            <!-- Hero Text Content Elements overlay -->
+            <div class="absolute inset-0 flex items-center">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10">
+                    <div class="max-w-3xl">
+                        <span class="inline-block bg-maratha-gold text-slate-950 font-bold px-3 py-1 rounded-full text-xs md:text-sm tracking-widest uppercase mb-4 shadow-md" data-en="RADHANAGARI assembly constituency" data-mr="राधानगरी विधानसभा मतदारसंघ">राधानगरी विधानसभा मतदारसंघ</span>
+                        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold font-marathi tracking-wide leading-tight text-white drop-shadow-lg" id="hero-title">
+                            राधानगरी-भुदरगड-आजरा मतदारसंघाच्या समृद्धीचे संकल्पपर्व!
+                        </h1>
+                        <p class="mt-6 text-base sm:text-lg lg:text-xl text-gray-200 max-w-2xl font-light" id="hero-desc">
+                            शिवसेना प्रमुख बाळासाहेब ठाकरे यांच्या विचारांचा वसा आणि वारसा घेऊन मतदारसंघाच्या शाश्वत आणि सर्वांगीण प्रगतीसाठी कटिबद्ध.
+                        </p>
+                        <div class="mt-10 flex flex-wrap gap-4">
+                            <a href="#membership" onclick="navigateTo('membership')" class="px-6 py-3.5 bg-saffron-500 hover:bg-saffron-600 text-white font-bold rounded-lg text-sm sm:text-base transition-all transform hover:-translate-y-1 shadow-lg shadow-saffron-500/20" data-en="Digital Membership Card" data-mr="डिजिटल सदस्य कार्ड मिळवा">डिजिटल सदस्य कार्ड मिळवा</a>
+                            <a href="#complaints" onclick="navigateTo('complaints')" class="px-6 py-3.5 bg-transparent border-2 border-white hover:bg-white hover:text-slate-900 text-white font-bold rounded-lg text-sm sm:text-base transition-all transform hover:-translate-y-1" data-en="File Complaint / Grievance" data-mr="तक्रार व समस्या नोंदवा">तक्रार व समस्या नोंदवा</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Carousel Controls -->
+            <div class="absolute bottom-6 right-6 z-20 flex gap-2">
+                <button onclick="prevSlide()" class="p-3 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm transition-all text-white"><i class="fa-solid fa-chevron-left"></i></button>
+                <button onclick="nextSlide()" class="p-3 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm transition-all text-white"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+        </section>
+
+        <!-- Interactive Assembly Stats section -->
+        <section class="py-12 bg-white dark:bg-zinc-950 relative -mt-8 mx-4 lg:mx-12 rounded-2xl shadow-xl z-20 border border-gray-100 dark:border-zinc-800">
+            <div class="max-w-7xl mx-auto px-4 grid grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+                <div class="p-4 border-r border-gray-100 dark:border-zinc-800 last:border-0">
+                    <div class="text-saffron-500 text-3xl sm:text-4xl font-extrabold mb-1 font-marathi" id="count-villages">114+</div>
+                    <p class="text-xs sm:text-sm font-semibold text-gray-500 dark:text-gray-400" data-en="Total Villages Served" data-mr="एकूण जोडलेली गावे">एकूण जोडलेली गावे</p>
+                </div>
+                <div class="p-4 border-r border-gray-100 dark:border-zinc-800 last:border-0">
+                    <div class="text-saffron-500 text-3xl sm:text-4xl font-extrabold mb-1 font-marathi" id="count-projects">480+</div>
+                    <p class="text-xs sm:text-sm font-semibold text-gray-500 dark:text-gray-400" data-en="Development Works completed" data-mr="पूर्ण विकासकामे">पूर्ण विकासकामे</p>
+                </div>
+                <div class="p-4 border-r border-gray-100 dark:border-zinc-800 last:border-0">
+                    <div class="text-saffron-500 text-3xl sm:text-4xl font-extrabold mb-1 font-marathi" id="count-citizens">1.5M+</div>
+                    <p class="text-xs sm:text-sm font-semibold text-gray-500 dark:text-gray-400" data-en="Citizens Assisted" data-mr="नागरिकांपर्यंत मदत">नागरिकांपर्यंत मदत</p>
+                </div>
+                <div class="p-4">
+                    <div class="text-saffron-500 text-3xl sm:text-4xl font-extrabold mb-1 font-marathi" id="count-volunteers">25K+</div>
+                    <p class="text-xs sm:text-sm font-semibold text-gray-500 dark:text-gray-400" data-en="Registered Volunteers" data-mr="कार्यरत स्वयंसेवक">कार्यरत स्वयंसेवक</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Leadership Section with elegant hover animations -->
+        <section class="py-16 px-4 max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <span class="text-saffron-600 font-bold text-sm uppercase tracking-widest" data-en="OUR LEADERS" data-mr="आमचे मार्गदर्शक">आमचे मार्गदर्शक</span>
+                <h2 class="text-3xl font-bold font-marathi mt-2 dark:text-white" data-en="Inspiring Pioneers of Hindutva" data-mr="शिवसेनेचे अखंड ऊर्जास्त्रोत">शिवसेनेचे अखंड ऊर्जास्त्रोत</h2>
+                <div class="w-16 h-1 bg-saffron-500 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Balasaheb Thackeray -->
+                <div class="bg-white dark:bg-zinc-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col items-center p-6 text-center border-t-4 border-saffron-500">
+                    <div class="w-32 h-32 rounded-full overflow-hidden mb-4 border-4 border-saffron-100 dark:border-zinc-700 bg-gray-100">
+                        <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&q=80&w=300" alt="Hinduhridaysamrat Balasaheb Thackeray" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" onerror="this.src='https://placehold.co/300x300/ff6a00/ffffff?text=Balasaheb+Thackeray'">
+                    </div>
+                    <h3 class="text-lg font-bold font-marathi text-saffron-600 dark:text-saffron-400">हिंदुहृदयसम्राट बाळासाहेब ठाकरे</h3>
+                    <p class="text-xs text-maratha-gold font-bold uppercase mt-1">शिवसेना संस्थापक</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-3 italic">"८० टक्के समाजकारण आणि २० टक्के राजकारण..."</p>
+                </div>
+
+                <!-- Eknath Shinde -->
+                <div class="bg-white dark:bg-zinc-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col items-center p-6 text-center border-t-4 border-saffron-500">
+                    <div class="w-32 h-32 rounded-full overflow-hidden mb-4 border-4 border-saffron-100 dark:border-zinc-700 bg-gray-100">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=300" alt="Eknath Shinde" class="w-full h-full object-cover hover:scale-110 transition-all duration-500" onerror="this.src='https://placehold.co/300x300/e04f00/ffffff?text=Eknath+Shinde'">
+                    </div>
+                    <h3 class="text-lg font-bold font-marathi text-saffron-600 dark:text-saffron-400">एकनाथ शिंदे</h3>
+                    <p class="text-xs text-maratha-gold font-bold uppercase mt-1">मुख्य नेते - शिवसेना</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-3 italic">"सर्वसामान्य जनतेचे लोकाभिमुख सरकार चालवणारे नेतृत्व."</p>
+                </div>
+
+                <!-- Constituency Representative (Example Local Leader) -->
+                <div class="bg-white dark:bg-zinc-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col items-center p-6 text-center border-t-4 border-saffron-500">
+                    <div class="w-32 h-32 rounded-full overflow-hidden mb-4 border-4 border-saffron-100 dark:border-zinc-700 bg-gray-100">
+                        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=300" alt="Constituency MLA / Candidate" class="w-full h-full object-cover hover:scale-110 transition-all duration-500" onerror="this.src='https://placehold.co/300x300/ffd700/000000?text=Radhanagari+Leader'">
+                    </div>
+                    <h3 class="text-lg font-bold font-marathi text-saffron-600 dark:text-saffron-400">मा. आमदार प्रकाश आबिटकर</h3>
+                    <p class="text-xs text-maratha-gold font-bold uppercase mt-1">आमदार - राधानगरी विधानसभा</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-3 italic">"राधानगरी, भुदरगड आणि आजरा तालुक्यांचा अविरत विकास!"</p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-10">
+                <a href="#leadership" onclick="navigateTo('leadership')" class="inline-flex items-center gap-2 text-saffron-600 hover:text-saffron-700 font-bold text-sm transition-all group">
+                    <span data-en="View All Leadership Profiles" data-mr="सर्व मार्गदर्शकांची माहिती पहा">सर्व मार्गदर्शकांची माहिती पहा</span>
+                    <i class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-1"></i>
+                </a>
+            </div>
+        </section>
+
+        <!-- Citizen Services Action Hub Grid -->
+        <section class="bg-gradient-to-br from-saffron-50 to-orange-50 dark:from-zinc-900 dark:to-zinc-950 py-16 px-4 border-t border-b border-saffron-100/30">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-12">
+                    <span class="text-saffron-600 font-bold text-sm uppercase tracking-widest" data-en="CITIZEN SERVICES" data-mr="नागरिक सेवा केंद्र">नागरिक सेवा केंद्र</span>
+                    <h2 class="text-3xl font-bold font-marathi mt-2 dark:text-white" data-en="Empowering & Assisting Local Communities" data-mr="थेट लोकसहभाग आणि जलद सहाय्यता">थेट लोकसहभाग आणि जलद सहाय्यता</h2>
+                    <div class="w-16 h-1 bg-saffron-500 mx-auto mt-4 rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Link 1: Complaint -->
+                    <div class="bg-white dark:bg-zinc-800 p-6 rounded-2xl shadow-md border border-gray-100 dark:border-zinc-700 hover:border-saffron-300 transition-all group">
+                        <div class="w-12 h-12 rounded-xl bg-red-100 dark:bg-red-950/40 text-red-600 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-circle-exclamation"></i>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2 group-hover:text-saffron-600 dark:text-white dark:group-hover:text-saffron-400 transition-colors" data-en="Complaint Portal" data-mr="तक्रार निवारण कक्ष">तक्रार निवारण कक्ष</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mb-4" data-en="Report a local issue or request emergency constituency help directly." data-mr="आपल्या समस्या, प्रश्न किंवा गावांमधील अडचणी थेट प्रशासनाकडे पाठवा.">आपल्या समस्या, प्रश्न किंवा गावांमधील अडचणी थेट प्रशासनाकडे पाठवा.</p>
+                        <a href="#complaints" onclick="navigateTo('complaints')" class="text-saffron-600 dark:text-saffron-400 font-bold text-xs inline-flex items-center gap-1 hover:underline">
+                            <span data-en="Submit Grievance" data-mr="तक्रार दाखल करा">तक्रार दाखल करा</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+
+                    <!-- Link 2: Government Schemes -->
+                    <div class="bg-white dark:bg-zinc-800 p-6 rounded-2xl shadow-md border border-gray-100 dark:border-zinc-700 hover:border-saffron-300 transition-all group">
+                        <div class="w-12 h-12 rounded-xl bg-orange-100 dark:bg-orange-950/40 text-orange-600 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-landmark"></i>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2 group-hover:text-saffron-600 dark:text-white dark:group-hover:text-saffron-400 transition-colors" data-en="Sarkari Yojana Finder" data-mr="शासकीय योजना माहिती">शासकीय योजना माहिती</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mb-4" data-en="Find details of state schemes & download official program forms." data-mr="लाडकी बहीण योजना, शेतकरी सन्मान निधी आणि इतर योजनांची पात्रता जाणून घ्या.">लाडकी बहीण योजना, शेतकरी सन्मान निधी आणि इतर योजनांची पात्रता जाणून घ्या.</p>
+                        <a href="#schemes" onclick="navigateTo('schemes')" class="text-saffron-600 dark:text-saffron-400 font-bold text-xs inline-flex items-center gap-1 hover:underline">
+                            <span data-en="Check Schemes" data-mr="योजना तपासा">योजना तपासा</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+
+                    <!-- Link 3: Villages Directory -->
+                    <div class="bg-white dark:bg-zinc-800 p-6 rounded-2xl shadow-md border border-gray-100 dark:border-zinc-700 hover:border-saffron-300 transition-all group">
+                        <div class="w-12 h-12 rounded-xl bg-green-100 dark:bg-green-950/40 text-green-600 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-tree-city"></i>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2 group-hover:text-saffron-600 dark:text-white dark:group-hover:text-saffron-400 transition-colors" data-en="Our Villages Directory" data-mr="आपले गावे आणि लोकसंख्या">आपले गावे आणि लोकसंख्या</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mb-4" data-en="Check progress reports, local booths and village developments." data-mr="राधानगरी मतदारसंघातील प्रत्येक गावचा इतिहास, समस्या व विकास आढावा.">राधानगरी मतदारसंघातील प्रत्येक गावचा इतिहास, समस्या व विकास आढावा.</p>
+                        <a href="#villages" onclick="navigateTo('villages')" class="text-saffron-600 dark:text-saffron-400 font-bold text-xs inline-flex items-center gap-1 hover:underline">
+                            <span data-en="Search Villages" data-mr="गाव शोधा">गाव शोधा</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+
+                    <!-- Link 4: Volunteer Panel -->
+                    <div class="bg-white dark:bg-zinc-800 p-6 rounded-2xl shadow-md border border-gray-100 dark:border-zinc-700 hover:border-saffron-300 transition-all group">
+                        <div class="w-12 h-12 rounded-xl bg-amber-100 dark:bg-amber-950/40 text-amber-600 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-users-gear"></i>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2 group-hover:text-saffron-600 dark:text-white dark:group-hover:text-saffron-400 transition-colors" data-en="Volunteer Network" data-mr="शिवसैनिक स्वयंसेवक">शिवसैनिक स्वयंसेवक</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mb-4" data-en="Become an active volunteer for constituency social works." data-mr="मतदारसंघातील विविध सामाजिक उपक्रम आणि युवा संघटनांसाठी नोंदणी करा.">मतदारसंघातील विविध सामाजिक उपक्रम आणि युवा संघटनांसाठी नोंदणी करा.</p>
+                        <a href="#volunteer" onclick="navigateTo('volunteer')" class="text-saffron-600 dark:text-saffron-400 font-bold text-xs inline-flex items-center gap-1 hover:underline">
+                            <span data-en="Register Now" data-mr="सहभागी व्हा">सहभागी व्हा</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Calendar / Events Timeline Teaser -->
+        <section class="py-16 px-4 max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Events Panel -->
+                <div>
+                    <h3 class="text-2xl font-bold font-marathi text-saffron-600 dark:text-saffron-500 mb-6 flex items-center gap-2">
+                        <i class="fa-solid fa-calendar-days text-xl"></i>
+                        <span data-en="Upcoming Events" data-mr="नियोजित कार्यक्रम व बैठका">नियोजित कार्यक्रम व बैठका</span>
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-white dark:bg-zinc-800 p-5 rounded-2xl shadow-sm border border-gray-100 dark:border-zinc-700 flex gap-4 hover:border-saffron-300 transition-all">
+                            <div class="bg-saffron-100 dark:bg-saffron-950 text-saffron-600 dark:text-saffron-400 font-bold p-3 rounded-xl h-16 w-16 flex flex-col justify-center items-center shrink-0">
+                                <span class="text-lg">20</span>
+                                <span class="text-[10px]">JULY</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-800 dark:text-white" data-en="Janata Darbar at Radhanagari Head Office" data-mr="जनता दरबार - राधानगरी मुख्य जनसंपर्क कार्यालय">जनता दरबार - राधानगरी मुख्य जनसंपर्क कार्यालय</h4>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1"><i class="fa-solid fa-clock mr-1"></i> 10:00 AM - 04:00 PM</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-300 mt-2" data-en="Direct grievance resolution meeting with the leadership team." data-mr="नागरिकांच्या समस्या निवारणासाठी थेट भेट आणि सविस्तर चर्चा सत्र.">नागरिकांच्या समस्या निवारणासाठी थेट भेट आणि सविस्तर चर्चा सत्र.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white dark:bg-zinc-800 p-5 rounded-2xl shadow-sm border border-gray-100 dark:border-zinc-700 flex gap-4 hover:border-saffron-300 transition-all">
+                            <div class="bg-saffron-100 dark:bg-saffron-950 text-saffron-600 dark:text-saffron-400 font-bold p-3 rounded-xl h-16 w-16 flex flex-col justify-center items-center shrink-0">
+                                <span class="text-lg">25</span>
+                                <span class="text-[10px]">JULY</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-800 dark:text-white" data-en="Free Medical Camp - Bhudargad Taluka" data-mr="मोफत भव्य आरोग्य शिबिर - भुदरगड">मोफत भव्य आरोग्य शिबिर - भुदरगड</h4>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1"><i class="fa-solid fa-clock mr-1"></i> 09:00 AM - 05:00 PM</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-300 mt-2" data-en="Experienced cardiologists & doctors conducting checkups." data-mr="अनुभवी डॉक्टरांच्या टीमद्वारे मोफत तपासणी, औषध वाटप आणि समुपदेशन.">अनुभवी डॉक्टरांच्या टीमद्वारे मोफत तपासणी, औषध वाटप आणि समुपदेशन.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Testimonials Carousel / Vision Statement Panel -->
+                <div class="bg-slate-900 text-white p-8 rounded-3xl relative overflow-hidden flex flex-col justify-between shadow-xl">
+                    <div class="absolute -right-12 -top-12 w-48 h-48 bg-saffron-500/10 rounded-full blur-2xl"></div>
+                    <div>
+                        <i class="fa-solid fa-quote-left text-saffron-500 text-5xl opacity-40 mb-4"></i>
+                        <h4 class="text-2xl font-bold font-marathi leading-relaxed mb-4 text-white" id="testimonial-quote">
+                            "धनुष्यबाण हे केवळ निवडणुकीचे चिन्ह नसून ते मतदारसंघातील प्रत्येक वंचित, शोषित नागरिकाचा विकास साधण्याचे मुख्य हत्यार आहे!"
+                        </h4>
+                    </div>
+                    <div class="flex items-center gap-4 mt-8">
+                        <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-saffron-500">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200" alt="Shivsainik feedback" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <div class="font-bold text-sm text-saffron-400">सौ. सीमा पाटील</div>
+                            <div class="text-xs text-gray-400">महिला आघाडी प्रमुख, आजरा</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- VIEW CONTAINER: ABOUT -->
+    <main id="view-about" class="view-container hidden fade-in py-16 px-4 max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+            <span class="text-saffron-600 font-bold text-sm uppercase tracking-widest" data-en="ABOUT RADHANAGARI" data-mr="आमच्या मतदारसंघाची माहिती">आमच्या मतदारसंघाची माहिती</span>
+            <h2 class="text-3xl font-bold font-marathi mt-2 dark:text-white" data-en="Radhanagari Vidhansabha Constituency" data-mr="निसर्गरम्य आणि समृद्ध मतदारसंघ">निसर्गरम्य आणि समृद्ध मतदारसंघ</h2>
+            <div class="w-16 h-1 bg-saffron-500 mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+            <div>
+                <h3 class="text-2xl font-bold mb-4 font-marathi text-saffron-600 dark:text-saffron-400" data-en="A Blend of History, Nature, & Progress" data-mr="ऐतिहासिक पार्श्वभूमी व भौगोलिक महत्त्व">ऐतिहासिक पार्श्वभूमी व भौगोलिक महत्त्व</h3>
+                <p class="text-gray-600 dark:text-zinc-300 leading-relaxed mb-4" data-en="Radhanagari constituency stands as an asset of Maharashtra, famous for its historic Radhanagari Dam built by Chhatrapati Shahu Maharaj, fertile fields, pristine forest sanctuaries, and hardworking farming communities." data-mr="छत्रपती राजर्षी शाहू महाराजांच्या ऐतिहासिक दूरदृष्टीतून साकारलेले राधानगरी धरण, समृद्ध शेती, अभयारण्ये आणि स्वाभिमानी शिवसैनिकांची ही भूमी आहे. राधानगरी, भुदरगड आणि आजरा तालुक्यांचा समावेश असलेला हा मतदारसंघ जलसंपत्ती आणि कृषी क्षेत्रात आघाडीवर आहे.">
+                    छत्रपती राजर्षी शाहू महाराजांच्या ऐतिहासिक दूरदृष्टीतून साकारलेले राधानगरी धरण, समृद्ध शेती, अभयारण्ये आणि स्वाभिमानी शिवसैनिकांची ही भूमी आहे. राधानगरी, भुदरगड आणि आजरा तालुक्यांचा समावेश असलेला हा मतदारसंघ जलसंपत्ती आणि कृषी क्षेत्रात आघाडीवर आहे.
+                </p>
+                <div class="grid grid-cols-2 gap-4 mt-6">
+                    <div class="p-4 bg-white dark:bg-zinc-800 rounded-xl shadow-sm border-l-4 border-saffron-500">
+                        <span class="block text-xl font-bold font-marathi text-slate-800 dark:text-white">३ तालुके</span>
+                        <span class="text-xs text-gray-500 dark:text-gray-400" data-en="Radhanagari, Bhudargad, Ajara" data-mr="राधानगरी, भुदरगड, आजरा">राधानगरी, भुदरगड, आजरा</span>
+                    </div>
+                    <div class="p-4 bg-white dark:bg-zinc-800 rounded-xl shadow-sm border-l-4 border-saffron-500">
+                        <span class="block text-xl font-bold font-marathi text-slate-800 dark:text-white">४ लाख+</span>
+                        <span class="text-xs text-gray-500 dark:text-gray-400" data-en="Eligible Voters" data-mr="सुशिक्षित मतदार">सुशिक्षित मतदार</span>
+                    </div>
+                </div>
+            </div>
+            <div class="relative rounded-2xl overflow-hidden shadow-xl h-80 bg-gray-200">
+                <img src="https://images.unsplash.com/photo-1566908829550-e6551b00979b?auto=format&fit=crop&q=80&w=800" alt="Radhanagari Dam Water" class="w-full h-full object-cover">
+                <div class="absolute bottom-4 left-4 bg-black/75 backdrop-blur-md px-4 py-2 rounded-lg text-white">
+                    <p class="text-xs font-bold" data-en="Radhanagari Reservoir" data-mr="राधानगरी जलाशय (लक्ष्मी तलाव)">राधानगरी जलाशय (लक्ष्मी तलाव)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Shiv Sena Timeline / History Section -->
+        <div class="mt-20">
+            <h3 class="text-2xl font-bold text-center font-marathi mb-12 dark:text-white" data-en="Our Vision & Historical Milestones" data-mr="शिवसेना मतदारसंघातील प्रदीर्घ विकास प्रवास">शिवसेना मतदारसंघातील प्रदीर्घ विकास प्रवास</h3>
+            <div class="relative border-l border-gray-300 dark:border-zinc-700 pl-6 ml-4 space-y-12">
+                
+                <!-- Timeline item 1 -->
+                <div class="relative">
+                    <div class="absolute -left-[31px] top-1.5 bg-saffron-500 w-4 h-4 rounded-full ring-4 ring-saffron-100 dark:ring-zinc-900"></div>
+                    <span class="text-xs font-bold text-saffron-600 dark:text-saffron-400">2014 - पायाभरणी</span>
+                    <h4 class="text-lg font-bold mt-1 dark:text-white" data-en="Historic Assembly Victory" data-mr="शिवसेनेच्या भगव्याचा दणदणीत विजय">शिवसेनेच्या भगव्याचा दणदणीत विजय</h4>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-2" data-en="First major breakthrough, promising modern water pipelines and better local roads." data-mr="मतदारसंघातील जनतेने बदल स्वीकारत शिवसेनेला संधी दिली; गावागावात पायाभूत कामांची मुहूर्तमेढ रोवली.">मतदारसंघातील जनतेने बदल स्वीकारत शिवसेनेला संधी दिली; गावागावात पायाभूत कामांची मुहूर्तमेढ रोवली.</p>
+                </div>
+
+                <!-- Timeline item 2 -->
+                <div class="relative">
+                    <div class="absolute -left-[31px] top-1.5 bg-saffron-500 w-4 h-4 rounded-full ring-4 ring-saffron-100 dark:ring-zinc-900"></div>
+                    <span class="text-xs font-bold text-saffron-600 dark:text-saffron-400">2019 - विकासपर्व</span>
+                    <h4 class="text-lg font-bold mt-1 dark:text-white" data-en="Dams & Infrastructure Boost" data-mr="कोल्हापुरी पद्धतीचे बंधारे आणि शेतीला बळ">कोल्हापुरी पद्धतीचे बंधारे आणि शेतीला बळ</h4>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-2" data-en="Inauguration of major water supply systems and concrete rural roads across three talukas." data-mr="कृषी पंढरीसाठी सिंचन व्यवस्था भक्कम करत २३+ नवीन बंधारे आणि रस्ते कामांचे भूमिपूजन संपन्न झाले.">कृषी पंढरीसाठी सिंचन व्यवस्था भक्कम करत २३+ नवीन बंधारे आणि रस्ते कामांचे भूमिपूजन संपन्न झाले.</p>
+                </div>
+
+                <!-- Timeline item 3 -->
+                <div class="relative">
+                    <div class="absolute -left-[31px] top-1.5 bg-saffron-500 w-4 h-4 rounded-full ring-4 ring-saffron-100 dark:ring-zinc-900"></div>
+                    <span class="text-xs font-bold text-saffron-600 dark:text-saffron-400">2024-2026 - डिजिटल व स्वावलंबी पर्व</span>
+                    <h4 class="text-lg font-bold mt-1 dark:text-white" data-en="Digital & Sustainable Radhanagari" data-mr="स्मार्ट गावे आणि युवा रोजगाराची क्रांती">स्मार्ट गावे आणि युवा रोजगाराची क्रांती</h4>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-2" data-en="Initiating the constituency digital network, instant grievance processing, and massive volunteer groups." data-mr="थेट डिजिटल माध्यम प्रणालीद्वारे जोडलेले नागरिक; गावे थेट संपर्क यंत्रणेत सहभागी.">थेट डिजिटल माध्यम प्रणालीद्वारे जोडलेले नागरिक; गावे थेट संपर्क यंत्रणेत सहभागी.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- VIEW CONTAINER: LEADERSHIP -->
+    <main id="view-leadership" class="view-container hidden fade-in py-16 px-4 max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+            <span class="text-saffron-600 font-bold text-sm uppercase tracking-widest" data-en="OUR GUIDES & LEADER PROFILE" data-mr="आमचे मार्गदर्शक व नेतृत्व">आमचे मार्गदर्शक व नेतृत्व</span>
+            <h2 class="text-3xl font-bold font-marathi mt-2 dark:text-white" data-en="Dedicated to the People of Radhanagari" data-mr="पक्षाचे प्रमुख मार्गदर्शक आणि स्थानिक प्रतिनिधी">पक्षाचे प्रमुख मार्गदर्शक आणि स्थानिक प्रतिनिधी</h2>
+            <div class="w-16 h-1 bg-saffron-500 mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Balasaheb Thackeray Profile -->
+            <div class="bg-white dark:bg-zinc-800 rounded-3xl overflow-hidden shadow-lg border border-gray-100 dark:border-zinc-700 flex flex-col items-center p-6 text-center">
+                <div class="w-28 h-28 rounded-full overflow-hidden mb-4 border-2 border-saffron-500">
+                    <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&q=80&w=200" alt="Balasaheb" class="w-full h-full object-cover grayscale" onerror="this.src='https://placehold.co/200x200/e04f00/ffffff?text=Balasaheb'">
+                </div>
+                <h3 class="text-lg font-bold font-marathi dark:text-white">हिंदुहृदयसम्राट बाळासाहेब ठाकरे</h3>
+                <p class="text-xs text-saffron-600 font-semibold mb-3">शिवसेना संस्थापक</p>
+                <p class="text-xs text-gray-500 dark:text-gray-400">पक्ष स्थापनेतून मराठी स्वाभिमान आणि हिंदुत्वाचा बुलंद आवाज देणारे अद्वितीय व्यक्तिमत्त्व.</p>
+            </div>
+
+            <!-- Anand Dighe Profile -->
+            <div class="bg-white dark:bg-zinc-800 rounded-3xl overflow-hidden shadow-lg border border-gray-100 dark:border-zinc-700 flex flex-col items-center p-6 text-center">
+                <div class="w-28 h-28 rounded-full overflow-hidden mb-4 border-2 border-saffron-500">
+                    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=200" alt="Anand Dighe" class="w-full h-full object-cover grayscale" onerror="this.src='https://placehold.co/200x200/ff6a00/ffffff?text=Dharmaveer'">
+                </div>
+                <h3 class="text-lg font-bold font-marathi dark:text-white">धर्मवीर आनंद दिघे</h3>
+                <p class="text-xs text-saffron-600 font-semibold mb-3">धर्मवीर - ठाणे जिल्हा प्रमुख</p>
+                <p class="text-xs text-gray-500 dark:text-gray-400">लोककल्याण, अहोरात्र मदत आणि जनसामान्यांचे प्रश्न सोडवण्यासाठी जीवन वाहणारे मार्गदर्शक.</p>
+            </div>
+
+            <!-- Eknath Shinde Profile -->
+            <div class="bg-white dark:bg-zinc-800 rounded-3xl overflow-hidden shadow-lg border border-gray-100 dark:border-zinc-700 flex flex-col items-center p-6 text-center">
+                <div class="w-28 h-28 rounded-full overflow-hidden mb-4 border-2 border-saffron-500">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200" alt="Eknath Shinde" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/200x200/e04f00/ffffff?text=Eknath+Shinde'">
+                </div>
+                <h3 class="text-lg font-bold font-marathi dark:text-white">मा. ना. एकनाथजी शिंदे</h3>
+                <p class="text-xs text-saffron-600 font-semibold mb-3">माननीय मुख्यमंत्री, महाराष्ट्र राज्य</p>
+                <p class="text-xs text-gray-500 dark:text-gray-400">सत्तेचा वापर लोककल्याणासाठी करून सर्वसामान्य कष्टकऱ्यांना न्याय देणारा लोकनेता.</p>
+            </div>
+
+            <!-- Local MLA Prakash Abitkar Profile -->
+            <div class="bg-white dark:bg-zinc-800 rounded-3xl overflow-hidden shadow-lg border border-gray-100 dark:border-zinc-700 flex flex-col items-center p-6 text-center">
+                <div class="w-28 h-28 rounded-full overflow-hidden mb-4 border-2 border-saffron-500">
+                    <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=200" alt="Prakash Abitkar" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/200x200/ffd700/000000?text=Prakash+Abitkar'">
+                </div>
+                <h3 class="text-lg font-bold font-marathi dark:text-white">मा. आमदार प्रकाश आबिटकर</h3>
+                <p class="text-xs text-saffron-600 font-semibold mb-3">आमदार - राधानगरी विधानसभा</p>
+                <p class="text-xs text-gray-500 dark:text-gray-400">राधानगरी-भुदरगड-आजरा मतदारसंघाच्या रस्ते, पाणी, शिक्षण व सिंचन क्षेत्रातील विकासाचे प्रवर्तक.</p>
+            </div>
+        </div>
+
+        <!-- Quote banner for localized progress -->
+        <div class="mt-16 bg-gradient-to-r from-saffron-600 to-red-600 text-white rounded-3xl p-8 shadow-xl max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-6">
+            <div class="text-4xl"><i class="fa-solid fa-flag-usa text-maratha-gold"></i></div>
+            <div>
+                <p class="text-lg font-semibold font-marathi" data-en="Our development goal is basic - prosperity to the last village and smiles to the last face." data-mr="आपले ध्येय स्पष्ट आहे - शेवटच्या दुर्गम वाडीवस्तीपर्यंत रस्ता, मुबलक पाणी आणि दर्जेदार शिक्षण पोहोचवणे.">"आपले ध्येय स्पष्ट आहे - शेवटच्या दुर्गम वाडीवस्तीपर्यंत रस्ता, मुबलक पाणी आणि दर्जेदार शिक्षण पोहोचवणे."</p>
+                <span class="block text-xs text-maratha-gold font-bold mt-2">- राधानगरी विधानसभा शिवसेना समन्वय समिती</span>
+            </div>
+        </div>
+    </main>
+
+    <!-- VIEW CONTAINER: DEVELOPMENT WORKS -->
+    <main id="view-development" class="view-container hidden fade-in py-16 px-4 max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+            <span class="text-saffron-600 font-bold text-sm uppercase tracking-widest" data-en="DEVELOPMENT PROJECTS" data-mr="विकासकामांचा प्रगती अहवाल">विकासकामांचा प्रगती अहवाल</span>
+            <h2 class="text-3xl font-bold font-marathi mt-2 dark:text-white" data-en="Transforming the Assembly Constituency" data-mr="पारदर्शक कारभार आणि झालेली विकासकामे">पारदर्शक कारभार आणि झालेली विकासकामे</h2>
+            <div class="w-16 h-1 bg-saffron-500 mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <!-- Filter Navigation Tabs -->
+        <div class="flex flex-wrap justify-center gap-2 mb-10" id="dev-project-filters">
+            <button onclick="filterDevWorks('all')" class="px-4 py-2 bg-saffron-600 text-white rounded-full text-xs sm:text-sm font-semibold transition-all active-filter" data-filter="all">सर्व कामे</button>
+            <button onclick="filterDevWorks('roads')" class="px-4 py-2 bg-white dark:bg-zinc-800 text-slate-700 dark:text-zinc-300 rounded-full text-xs sm:text-sm font-semibold hover:bg-saffron-50 dark:hover:bg-zinc-700 transition-all" data-filter="roads">रस्ते व पूल</button>
+            <button onclick="filterDevWorks('water')" class="px-4 py-2 bg-white dark:bg-zinc-800 text-slate-700 dark:text-zinc-300 rounded-full text-xs sm:text-sm font-semibold hover:bg-saffron-50 dark:hover:bg-zinc-700 transition-all" data-filter="water">सिंचन व पाणीपुरवठा</button>
+            <button onclick="filterDevWorks('education')" class="px-4 py-2 bg-white dark:bg-zinc-800 text-slate-700 dark:text-zinc-300 rounded-full text-xs sm:text-sm font-semibold hover:bg-saffron-50 dark:hover:bg-zinc-700 transition-all" data-filter="education">शिक्षण व आरोग्य</button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="dev-projects-grid">
+            <!-- Card 1: Water -->
+            <div class="bg-white dark:bg-zinc-800 rounded-2xl overflow-hidden shadow-md border border-gray-100 dark:border-zinc-700 dev-card-item" data-category="water">
+                <div class="h-48 bg-slate-200 relative">
+                    <img src="https://images.unsplash.com/photo-1542044896530-05d85be9b11a?auto=format&fit=crop&q=80&w=400" alt="Water pipeline project" class="w-full h-full object-cover">
+                    <span class="absolute top-4 right-4 bg-green-500 text-white text-xs px-2.5 py-1 rounded-full font-bold">पूर्ण (Completed)</span>
+                </div>
+                <div class="p-6">
+                    <h3 class="font-bold text-lg dark:text-white" data-en="23 Kolhapur Type Bandharas Restored" data-mr="२३ कोल्हापुरी पद्धतीचे बंधारे दुरुस्ती">२३ कोल्हापुरी पद्धतीचे बंधारे दुरुस्ती</h3>
+                    <p class="text-xs text-saffron-600 font-bold mt-1">विभाग: पाणी सिंचन</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-3" data-en="Ensuring year-round water supply for agriculture and animal husbandry in local Radhanagari farming areas." data-mr="शेतीसाठी बाराही महिने पाणी उपलब्ध करण्यासाठी राधानगरी व भुदरगड परिसरातील जुन्या बंधाऱ्यांची यशस्वी पुनर्रचना व दुरुस्ती.">शेतीसाठी बाराही महिने पाणी उपलब्ध करण्यासाठी राधानगरी व भुदरगड परिसरातील जुन्या बंधाऱ्यांची यशस्वी पुनर्रचना व दुरुस्ती.</p>
+                    <div class="mt-4 pt-4 border-t border-gray-100 dark:border-zinc-700 flex justify-between text-xs text-gray-400">
+                        <span>निधी: रु. १२ कोटी</span>
+                        <span>प्रभाग: राधानगरी तालुका</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Roads -->
+            <div class="bg-white dark:bg-zinc-800 rounded-2xl overflow-hidden shadow-md border border-gray-100 dark:border-zinc-700 dev-card-item" data-category="roads">
+                <div class="h-48 bg-slate-200 relative">
+                    <img src="https://images.unsplash.com/photo-1515162305285-0293e4767cc2?auto=format&fit=crop&q=80&w=400" alt="Road building" class="w-full h-full object-cover">
+                    <span class="absolute top-4 right-4 bg-orange-500 text-white text-xs px-2.5 py-1 rounded-full font-bold" data-en="Ongoing" data-mr="प्रगतीपथावर">प्रगतीपथावर</span>
+                </div>
+                <div class="p-6">
+                    <h3 class="font-bold text-lg dark:text-white" data-en="Radhanagari to Ajara Major Highway Connecting Road" data-mr="राधानगरी ते आजरा जोड महामार्ग डांबरीकरण">राधानगरी ते आजरा जोड महामार्ग डांबरीकरण</h3>
+                    <p class="text-xs text-saffron-600 font-bold mt-1">विभाग: रस्ते व दळणवळण</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-3" data-en="Widening and resurfacing of the main ghat linking highways, ensuring safe transportation during monsoons." data-mr="पावसाळ्यात दरडी कोसळण्याची भीती कमी करण्यासाठी नवीन तंत्रज्ञानासह घाटरस्ते आणि मुख्य महामार्ग जोडणी काम सुरू.">पावसाळ्यात दरडी कोसळण्याची भीती कमी करण्यासाठी नवीन तंत्रज्ञानासह घाटरस्ते आणि मुख्य महामार्ग जोडणी काम सुरू.</p>
+                    <div class="mt-4 pt-4 border-t border-gray-100 dark:border-zinc-700 flex justify-between text-xs text-gray-400">
+                        <span>निधी: रु. १८ कोटी</span>
+                        <span>प्रभाग: घाट परिसर</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3: Education -->
+            <div class="bg-white dark:bg-zinc-800 rounded-2xl overflow-hidden shadow-md border border-gray-100 dark:border-zinc-700 dev-card-item" data-category="education">
+                <div class="h-48 bg-slate-200 relative">
+                    <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=400" alt="Modern school" class="w-full h-full object-cover">
+                    <span class="absolute top-4 right-4 bg-green-500 text-white text-xs px-2.5 py-1 rounded-full font-bold">पूर्ण (Completed)</span>
+                </div>
+                <div class="p-6">
+                    <h3 class="font-bold text-lg dark:text-white" data-en="Digital Classrooms in 45 ZP Schools" data-mr="४५ जिल्हा परिषद शाळांमध्ये डिजिटल वर्गखोल्या">४५ जिल्हा परिषद शाळांमध्ये डिजिटल वर्गखोल्या</h3>
+                    <p class="text-xs text-saffron-600 font-bold mt-1">विभाग: शिक्षण विभाग</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-3" data-en="Providing modern laptops, projectors, and clean drinking water plants to high-altitude rural schools." data-mr="ग्रामीण व डोंगराळ भागातील मुलांसाठी संगणक लॅब, डिजिटल ई-लर्निंग सिस्टीम आणि शुद्ध पिण्याच्या पाण्याच्या सोयी.">ग्रामीण व डोंगराळ भागातील मुलांसाठी संगणक लॅब, डिजिटल ई-लर्निंग सिस्टीम आणि शुद्ध पिण्याच्या पाण्याच्या सोयी.</p>
+                    <div class="mt-4 pt-4 border-t border-gray-100 dark:border-zinc-700 flex justify-between text-xs text-gray-400">
+                        <span>निधी: रु. ४.५ कोटी</span>
+                        <span>प्रभाग: सर्व तालुके</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- VIEW CONTAINER: GOVERNMENT SCHEMES -->
+    <main id="view-schemes" class="view-container hidden fade-in py-16 px-4 max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+            <span class="text-saffron-600 font-bold text-sm uppercase tracking-widest" data-en="MAHARASHTRA GOVT SCHEMES" data-mr="शासकीय जनहितकारी योजना">शासकीय जनहितकारी योजना</span>
+            <h2 class="text-3xl font-bold font-marathi mt-2 dark:text-white" data-en="Welfare Programs & Benefits Portal" data-mr="आपल्यासाठी शासकीय योजनांची अचूक माहिती">आपल्यासाठी शासकीय योजनांची अचूक माहिती</h2>
+            <div class="w-16 h-1 bg-saffron-500 mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div class="mb-8 max-w-lg mx-auto flex">
+            <input type="text" id="scheme-search" onkeyup="searchSchemes()" placeholder="योजना किंवा शब्दाने शोधा (उदा: बहीण, शेतकरी)..." class="w-full px-4 py-3 bg-white dark:bg-zinc-800 border border-gray-300 dark:border-zinc-700 rounded-l-xl focus:outline-none focus:ring-2 focus:ring-saffron-500">
+            <button class="bg-saffron-500 hover:bg-saffron-600 text-white px-6 rounded-r-xl transition-all"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="schemes-grid">
+            <!-- Scheme 1 -->
+            <div class="bg-white dark:bg-zinc-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-zinc-700 scheme-card hover:border-saffron-300 transition-all">
+                <span class="inline-block bg-orange-100 dark:bg-orange-950 text-orange-600 text-xs px-2.5 py-1 rounded-full font-bold mb-3">महिला कल्याण (Women)</span>
+                <h3 class="font-bold text-lg mb-2 dark:text-white scheme-title">मुख्यमंत्री माझी लाडकी बहीण योजना</h3>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">पात्र महिलांना दरमहा रु. १५०० चे थेट आर्थिक सहाय्य आणि शासकीय योजनांच्या सोयी.</p>
+                <div class="pt-4 border-t border-gray-100 dark:border-zinc-700 flex justify-between text-xs font-semibold">
+                    <span class="text-slate-500">पात्रता: २१ ते ६५ वर्षे</span>
+                    <a href="https://ladkibahin.maharashtra.gov.in/" target="_blank" class="text-saffron-500 hover:underline">अर्ज करा <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-[10px]"></i></a>
+                </div>
+            </div>
+
+            <!-- Scheme 2 -->
+            <div class="bg-white dark:bg-zinc-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-zinc-700 scheme-card hover:border-saffron-300 transition-all">
+                <span class="inline-block bg-amber-100 dark:bg-amber-950 text-amber-600 text-xs px-2.5 py-1 rounded-full font-bold mb-3">शेतकरी कल्याण (Farmers)</span>
+                <h3 class="font-bold text-lg mb-2 dark:text-white scheme-title">नमो शेतकरी महासन्मान निधी योजना</h3>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">शेतकऱ्यांच्या बँक खात्यात दरवर्षी रु. ६,००० ची थेट मदत, कृषी साहित्य व खते खरेदीसाठी उपयुक्त.</p>
+                <div class="pt-4 border-t border-gray-100 dark:border-zinc-700 flex justify-between text-xs font-semibold">
+                    <span class="text-slate-500">पात्रता: भूधारक शेतकरी</span>
+                    <a href="#" class="text-saffron-500 hover:underline">माहिती पहा <i class="fa-solid fa-arrow-right ml-1 text-[10px]"></i></a>
+                </div>
+            </div>
+
+            <!-- Scheme 3 -->
+            <div class="bg-white dark:bg-zinc-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-zinc-700 scheme-card hover:border-saffron-300 transition-all">
+                <span class="inline-block bg-blue-100 dark:bg-blue-950 text-blue-600 text-xs px-2.5 py-1 rounded-full font-bold mb-3">युवा विकास (Youth)</span>
+                <h3 class="font-bold text-lg mb-2 dark:text-white scheme-title">मुख्यमंत्री युवा कार्यप्रशिक्षण योजना</h3>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">शिक्षित बेरोजगारांना विविध उद्योगांमध्ये प्रत्यक्ष कामाचे प्रशिक्षण व दरमहा विद्यावेतन.</p>
+                <div class="pt-4 border-t border-gray-100 dark:border-zinc-700 flex justify-between text-xs font-semibold">
+                    <span class="text-slate-500">पात्रता: १२वी / पदवीधर</span>
+                    <a href="#" class="text-saffron-500 hover:underline">माहिती पहा <i class="fa-solid fa-arrow-right ml-1 text-[10px]"></i></a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- VIEW CONTAINER: VILLAGES -->
+    <main id="view-villages" class="view-container hidden fade-in py-16 px-4 max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+            <span class="text-saffron-600 font-bold text-sm uppercase tracking-widest" data-en="RADHANAGARI ASSEMBLY VILLAGES" data-mr="मतदारसंघातील गावे">मतदारसंघातील गावे</span>
+            <h2 class="text-3xl font-bold font-marathi mt-2 dark:text-white" data-en="Search Villages Directory & Booths" data-mr="आपली गावे - प्रभाग आणि लोकसंख्या शोधक">आपली गावे - प्रभाग आणि लोकसंख्या शोधक</h2>
+            <div class="w-16 h-1 bg-saffron-500 mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div class="mb-8 max-w-lg mx-auto flex">
+            <input type="text" id="village-search" onkeyup="searchVillages()" placeholder="गाव किंवा तालुक्याचे नाव शोधा (उदा: सोळंकुर)..." class="w-full px-4 py-3 bg-white dark:bg-zinc-800 border border-gray-300 dark:border-zinc-700 rounded-l-xl focus:outline-none focus:ring-2 focus:ring-saffron-500">
+            <span class="bg-saffron-500 text-white px-5 rounded-r-xl flex items-center justify-center"><i class="fa-solid fa-tree-city"></i></span>
+        </div>
+
+        <!-- Village Table/Grid results -->
+        <div class="bg-white dark:bg-zinc-800 rounded-3xl overflow-hidden shadow-md border border-gray-100 dark:border-zinc-700">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-saffron-500 text-white text-xs sm:text-sm">
+                            <th class="p-4" data-en="Village Name" data-mr="गावचे नाव">गावचे नाव</th>
+                            <th class="p-4" data-en="Taluka" data-mr="तालुका">तालुका</th>
+                            <th class="p-4" data-en="Booth Count" data-mr="मतदान केंद्र">मतदान केंद्र</th>
+                            <th class="p-4" data-en="Status" data-mr="विकास स्थिती">विकास स्थिती</th>
+                        </tr>
+                    </thead>
+                    <tbody id="village-list-table" class="divide-y divide-gray-100 dark:divide-zinc-700">
+                        <!-- Plotted via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- VIEW CONTAINER: COMPLAINTS PORTAL -->
+    <main id="view-complaints" class="view-container hidden fade-in py-16 px-4 max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+            <span class="text-saffron-600 font-bold text-sm uppercase tracking-widest" data-en="CITIZEN GRIVANCE PORTAL" data-mr="थेट मदत व तक्रार कक्ष">थेट मदत व तक्रार कक्ष</span>
+            <h2 class="text-3xl font-bold font-marathi mt-2 dark:text-white" data-en="Submit & Track Complaints Online" data-mr="समस्या मांडा, प्रशासनाकडून उत्तर मिळवा">समस्या मांडा, प्रशासनाकडून उत्तर मिळवा</h2>
+            <div class="w-16 h-1 bg-saffron-500 mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Submission Form -->
+            <div class="lg:col-span-2 bg-white dark:bg-zinc-800 p-6 rounded-3xl shadow-md border border-gray-100 dark:border-zinc-700">
+                <h3 class="text-xl font-bold mb-4 font-marathi text-saffron-600 dark:text-saffron-400" data-en="New Complaint Form" data-mr="नवीन तक्रार अर्ज">नवीन तक्रार अर्ज</h3>
+                <form id="complaint-form" onsubmit="submitComplaint(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 dark:text-gray-400 mb-1" data-en="Citizen Name" data-mr="आपले नाव (पूर्ण नाव)">आपले नाव (पूर्ण नाव)</label>
+                        <input type="text" id="comp-name" required class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-zinc-700 bg-transparent focus:ring-2 focus:ring-saffron-500">
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-gray-500 dark:text-gray-400 mb-1" data-en="Phone" data-mr="मोबाईल नंबर">मोबाईल नंबर</label>
+                            <input type="tel" id="comp-phone" required class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-zinc-700 bg-transparent focus:ring-2 focus:ring-saffron-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-gray-500 dark:text-gray-400 mb-1" data-en="Village" data-mr="गाव / प्रभाग">गाव / प्रभाग</label>
+                            <input type="text" id="comp-village" required class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-zinc-700 bg-transparent focus:ring-2 focus:ring-saffron-500">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 dark:text-gray-400 mb-1" data-en="Category" data-mr="समस्येचा प्रकार">समस्येचा प्रकार</label>
+                        <select id="comp-category" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 focus:ring-2 focus:ring-saffron-500">
+                            <option value="roads">रस्ते व दळणवळण (Roads)</option>
+                            <option value="water">पिण्याचे पाणी / सिंचन (Water)</option>
+                            <option value="electricity">विद्युत पुरवठा (Electricity)</option>
+                            <option value="health">आरोग्य व स्वच्छता (Health)</option>
+                            <option value="others">इतर समस्या (Others)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 dark:text-gray-400 mb-1" data-en="Description" data-mr="समस्या सविस्तर वर्णन करा">समस्या सविस्तर वर्णन करा</label>
+                        <textarea id="comp-desc" rows="4" required class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-zinc-700 bg-transparent focus:ring-2 focus:ring-saffron-500"></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-3 bg-saffron-500 hover:bg-saffron-600 text-white font-bold rounded-lg tracking-wide shadow-md transition-all">तक्रार दाखल करा (Submit Grievance)</button>
+                </form>
+            </div>
+
+            <!-- Complaint Tracking status panel -->
+            <div class="bg-slate-100 dark:bg-zinc-850 p-6 rounded-3xl border border-gray-200 dark:border-zinc-800 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-lg font-bold mb-3 font-marathi text-slate-800 dark:text-white" data-en="Track Complaint" data-mr="तक्रारीची स्थिती तपासा">तक्रारीची स्थिती तपासा</h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mb-4" data-en="Enter ticket ID below to track resolution updates." data-mr="आपल्याला मिळालेला तक्रार कोड खालील रकान्यात टाकून प्रगती पहा.">आपल्याला मिळालेला तक्रार कोड खालील रकान्यात टाकून प्रगती पहा.</p>
+                    <div class="flex gap-2">
+                        <input type="text" id="track-id-input" placeholder="उदा: SHIV-1234..." class="w-full px-3 py-2 border rounded-lg dark:bg-zinc-800 dark:border-zinc-700">
+                        <button onclick="trackGrievance()" class="bg-saffron-500 text-white px-4 rounded-lg hover:bg-saffron-600 transition-all"><i class="fa-solid fa-search"></i></button>
+                    </div>
+                    <!-- Tracking response layout -->
+                    <div id="tracking-result-box" class="mt-4 p-4 rounded-xl bg-white dark:bg-zinc-850 border border-gray-200 dark:border-zinc-700 hidden text-xs">
+                        <!-- Populated by system logic dynamically -->
+                    </div>
+                </div>
+
+                <div class="mt-8 pt-4 border-t border-gray-200 dark:border-zinc-700">
+                    <h4 class="font-bold text-xs uppercase text-gray-500 mb-2">मागील तक्रारी (Local Log)</h4>
+                    <ul id="local-complaint-log" class="text-xs space-y-2 text-gray-600 dark:text-gray-300">
+                        <li class="italic text-gray-400">अद्याप कोणतीही स्थानिक तक्रार केलेली नाही.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- VIEW CONTAINER: MEMBERSHIP & CARD GENERATOR -->
+    <main id="view-membership" class="view-container hidden fade-in py-16 px-4 max-w-5xl mx-auto">
+        <div class="text-center mb-12">
+            <span class="text-saffron-600 font-bold text-sm uppercase tracking-widest" data-en="ONLINE MEMBERSHIP" data-mr="शिवसेना डिजिटल नोंदणी">शिवसेना डिजिटल नोंदणी</span>
+            <h2 class="text-3xl font-bold font-marathi mt-2 dark:text-white" data-en="Get Your Digital Shiv Sena Card" data-mr="शिवसेनेचे अधिकृत डिजिटल सभासद कार्ड मिळवा">शिवसेनेचे अधिकृत डिजिटल सभासद कार्ड मिळवा</h2>
+            <div class="w-16 h-1 bg-saffron-500 mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <!-- Form Card Input fields -->
+            <div class="bg-white dark:bg-zinc-800 p-6 rounded-3xl shadow-md border border-gray-100 dark:border-zinc-700">
+                <h3 class="text-xl font-bold mb-4 font-marathi text-saffron-600 dark:text-saffron-400" data-en="Membership Details" data-mr="सभासद नोंदणी अर्ज">सभासद नोंदणी अर्ज</h3>
+                <form id="membership-form" onsubmit="generateMemberCard(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 dark:text-gray-400 mb-1" data-en="Your Full Name" data-mr="नाव">नाव</label>
+                        <input type="text" id="member-name-input" required placeholder="उदा. सागर पाटील" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-zinc-700 bg-transparent focus:ring-2 focus:ring-saffron-500">
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-gray-500 dark:text-gray-400 mb-1" data-en="Mobile No" data-mr="मोबाईल क्रमांक">मोबाईल क्रमांक</label>
+                            <input type="tel" id="member-phone-input" required class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-zinc-700 bg-transparent focus:ring-2 focus:ring-saffron-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-gray-500 dark:text-gray-400 mb-1" data-en="Village" data-mr="गाव">गाव</label>
+                            <input type="text" id="member-village-input" required class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-zinc-700 bg-transparent focus:ring-2 focus:ring-saffron-500">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 dark:text-gray-400 mb-1" data-en="Blood Group" data-mr="रक्तगट (Blood Group)">रक्तगट (Blood Group)</label>
+                        <select id="member-blood-input" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800">
+                            <option value="A+">A+</option>
+                            <option value="B+">B+</option>
+                            <option value="O+">O+</option>
+                            <option value="AB+">AB+</option>
+                            <option value="O-">O-</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="w-full py-3 bg-saffron-500 hover:bg-saffron-600 text-white font-bold rounded-lg shadow-lg shadow-saffron-500/10">कार्ड तयार करा (Generate Digital Card)</button>
+                </form>
+            </div>
+
+            <!-- Beautiful Card Preview Rendering Panel -->
+            <div class="flex flex-col items-center justify-center">
+                <div id="membership-card-visual" class="w-full max-w-[420px] aspect-[1.58/1] bg-gradient-to-br from-saffron-600 to-red-600 rounded-2xl shadow-2xl relative overflow-hidden text-white p-5 border-4 border-maratha-gold">
+                    <!-- Gold ribbon effect -->
+                    <div class="absolute -right-16 -top-16 w-36 h-36 bg-amber-400/20 rounded-full blur-xl"></div>
+                    
+                    <div class="flex justify-between items-start border-b border-white/20 pb-2 mb-3">
+                        <div class="flex items-center gap-2">
+                            <div class="bg-white p-1 rounded-full text-saffron-600">
+                                <svg class="w-6 h-6" viewBox="0 0 100 100" fill="currentColor">
+                                    <path d="M15 50 C 15 25, 85 25, 85 50 C 85 75, 15 75, 15 50" stroke="none"/>
+                                    <path d="M8 50 L 92 50 M 76 38 L 92 50 L 76 62" stroke="white" stroke-width="8" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-marathi font-bold text-sm tracking-wide text-white">शिवसेना महाराष्ट्र</h4>
+                                <p class="text-[8px] uppercase tracking-wider text-amber-200">Official Membership Card</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <span class="bg-black/40 px-2 py-0.5 rounded text-[8px] font-bold text-maratha-gold border border-maratha-gold/20">राधानगरी विधानसभा</span>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <!-- Profile pic placeholder -->
+                        <div class="w-20 h-24 bg-white/20 border border-white/40 rounded-lg flex flex-col items-center justify-center relative shrink-0 overflow-hidden">
+                            <i class="fa-solid fa-user text-3xl opacity-60"></i>
+                            <div class="absolute bottom-0 inset-x-0 bg-black/60 text-[6px] py-0.5 text-center text-white font-bold">MEMBER</div>
+                        </div>
+                        <div class="flex-1 flex flex-col justify-between text-xs space-y-1">
+                            <div>
+                                <span class="text-[8px] text-orange-200 uppercase block">नाव / Name</span>
+                                <span id="card-name" class="font-bold tracking-wide text-sm text-white">सागर पाटील</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div>
+                                    <span class="text-[8px] text-orange-200 block">गाव / Village</span>
+                                    <span id="card-village" class="font-bold">राधानगरी</span>
+                                </div>
+                                <div>
+                                    <span class="text-[8px] text-orange-200 block">रक्तगट / Blood</span>
+                                    <span id="card-blood" class="font-bold">O+</span>
+                                </div>
+                            </div>
+                            <div class="pt-2">
+                                <span class="text-[7px] text-orange-200 block">सदस्य ID / Member ID</span>
+                                <span id="card-id" class="font-mono text-[10px] text-maratha-gold font-bold">SHIV-2026-8921</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Footer card elements -->
+                    <div class="absolute bottom-2 right-4 text-[7px] text-white/50 font-semibold tracking-wider uppercase">
+                        जय महाराष्ट्र!
+                    </div>
+                </div>
+
+                <button onclick="printCard()" class="mt-6 px-6 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm rounded-lg flex items-center gap-2 shadow-lg transition-all">
+                    <i class="fa-solid fa-print"></i>
+                    <span data-en="Print / Save PDF Card" data-mr="सदस्य कार्ड प्रिंट करा">सदस्य कार्ड प्रिंट करा</span>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- VIEW CONTAINER: VOLUNTEER -->
+    <main id="view-volunteer" class="view-container hidden fade-in py-16 px-4 max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+            <span class="text-saffron-600 font-bold text-sm uppercase tracking-widest" data-en="VOLUNTEER FORCE" data-mr="शिवसेना स्वयंसेवक सैन्य">शिवसेना स्वयंसेवक सैन्य</span>
+            <h2 class="text-3xl font-bold font-marathi mt-2 dark:text-white" data-en="Register as a Local Volunteer" data-mr="मतदारसंघाच्या विकासकार्यात आपले योगदान द्या">मतदारसंघाच्या विकासकार्यात आपले योगदान द्या</h2>
+            <div class="w-16 h-1 bg-saffron-500 mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div class="bg-white dark:bg-zinc-800 p-8 rounded-3xl shadow-xl border border-gray-100 dark:border-zinc-700">
+            <form id="volunteer-form" onsubmit="submitVolunteer(event)" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 dark:text-gray-400 mb-1">नाव / Full Name</label>
+                        <input type="text" id="vol-name" required class="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-zinc-700 bg-transparent focus:ring-2 focus:ring-saffron-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 dark:text-gray-400 mb-1">मोबाईल नंबर / Phone</label>
+                        <input type="tel" id="vol-phone" required class="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-zinc-700 bg-transparent focus:ring-2 focus:ring-saffron-500">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 dark:text-gray-400 mb-1">तालुका / Region</label>
+                        <select id="vol-taluka" class="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 focus:ring-2 focus:ring-saffron-500">
+                            <option value="radhanagari">राधानगरी (Radhanagari)</option>
+                            <option value="bhudargad">भुदरगड (Bhudargad)</option>
+                            <option value="ajara">आजरा (Ajara)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 dark:text-gray-400 mb-1">प्राधान्य काम / Main Interest Area</label>
+                        <select id="vol-interest" class="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 focus:ring-2 focus:ring-saffron-500">
+                            <option value="social-service">सामाजिक कामे (Social Welfare)</option>
+                            <option value="digital-media">सोशल मीडिया / डिजिटल सेल (Digital Media)</option>
+                            <option value="campaign">निवडणूक आणि बूथ व्यवस्थापन (Campaigning)</option>
+                            <option value="youth">युवा आघाडी उपक्रम (Youth Organization)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full py-4 bg-saffron-500 hover:bg-saffron-600 text-white font-bold rounded-xl tracking-wide shadow-lg transition-all text-sm sm:text-base">स्वयंसेवक म्हणून सहभागी व्हा (Register as Volunteer)</button>
+            </form>
+        </div>
+    </main>
+
+    <!-- VIEW CONTAINER: NEWS & MEDIA -->
+    <main id="view-news" class="view-container hidden fade-in py-16 px-4 max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+            <span class="text-saffron-600 font-bold text-sm uppercase tracking-widest" data-en="LATEST NEWS" data-mr="बातम्या आणि घडामोडी">बातम्या आणि घडामोडी</span>
+            <h2 class="text-3xl font-bold font-marathi mt-2 dark:text-white" data-en="Press Releases & Announcements" data-mr="मतदारसंघातील विविध घडामोडी व माहिती">मतदारसंघातील विविध घडामोडी व माहिती</h2>
+            <div class="w-16 h-1 bg-saffron-500 mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- News item 1 -->
+            <div class="bg-white dark:bg-zinc-800 rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-zinc-700 hover:border-saffron-300 transition-all">
+                <div class="h-48 bg-slate-200">
+                    <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=400" alt="News briefing" class="w-full h-full object-cover">
+                </div>
+                <div class="p-6">
+                    <span class="text-xs text-saffron-600 font-bold">१५ जुलै २०२६</span>
+                    <h3 class="font-bold text-lg mt-1 dark:text-white" data-en="New Drinking Water Pipeline Approved" data-mr="दुर्गम वाड्यांमध्ये नवीन नळ पाणी पुरवठा योजना मंजूर">दुर्गम वाड्यांमध्ये नवीन नळ पाणी पुरवठा योजना मंजूर</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-2" data-en="Water grid worth 5.2 crore approved by government under regional planning." data-mr="मतदारसंघातील १३ डोंगराळ वस्तींमध्ये शुद्ध पाणी योजना व जलवाहिन्या टाकण्याचे काम तत्काळ सुरू होणार.">मतदारसंघातील १३ डोंगराळ वस्तींमध्ये शुद्ध पाणी योजना व जलवाहिन्या टाकण्याचे काम तत्काळ सुरू होणार.</p>
+                </div>
+            </div>
+
+            <!-- News item 2 -->
+            <div class="bg-white dark:bg-zinc-800 rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-zinc-700 hover:border-saffron-300 transition-all">
+                <div class="h-48 bg-slate-200">
+                    <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=400" alt="Youth training" class="w-full h-full object-cover">
+                </div>
+                <div class="p-6">
+                    <span class="text-xs text-saffron-600 font-bold">१२ जुलै २०२६</span>
+                    <h3 class="font-bold text-lg mt-1 dark:text-white" data-en="Free Digital Skills Camp for Radhanagari Youth" data-mr="तरुणांसाठी मोफत डिजिटल कौशल्य आणि कोडिंग कॅम्प">तरुणांसाठी मोफत डिजिटल कौशल्य आणि कोडिंग कॅम्प</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-2" data-en="Shiv Sena IT cell to orchestrate a week long training at regional hubs." data-mr="राधानगरी व आजरा येथील युवकांसाठी शिवसेनेच्या वतीने मोफत आयटी व करिअर मार्गदर्शन शिबिर आयोजन.">राधानगरी व आजरा येथील युवकांसाठी शिवसेनेच्या वतीने मोफत आयटी व करिअर मार्गदर्शन शिबिर आयोजन.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- VIEW CONTAINER: GALLERY -->
+    <main id="view-gallery" class="view-container hidden fade-in py-16 px-4 max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+            <span class="text-saffron-600 font-bold text-sm uppercase tracking-widest" data-en="PHOTO & VIDEO GALLERY" data-mr="छायाचित्र व व्हिडिओ गॅलरी">छायाचित्र व व्हिडिओ गॅलरी</span>
+            <h2 class="text-3xl font-bold font-marathi mt-2 dark:text-white" data-en="Visual Journey of Radhanagari constituency" data-mr="विविध सामाजिक कार्यक्रम व विकास कामांची क्षणचित्रे">विविध सामाजिक कार्यक्रम व विकास कामांची क्षणचित्रे</h2>
+            <div class="w-16 h-1 bg-saffron-500 mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="gallery-grid">
+            <div class="relative group overflow-hidden rounded-2xl h-48 bg-gray-200 cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?auto=format&fit=crop&q=80&w=800')">
+                <img src="https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?auto=format&fit=crop&q=80&w=400" alt="Voter meeting" class="w-full h-full object-cover transition-transform group-hover:scale-110 duration-300">
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white text-xl transition-opacity"><i class="fa-solid fa-expand"></i></div>
+            </div>
+            <div class="relative group overflow-hidden rounded-2xl h-48 bg-gray-200 cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1605000797499-95a51c7769ae?auto=format&fit=crop&q=80&w=800')">
+                <img src="https://images.unsplash.com/photo-1605000797499-95a51c7769ae?auto=format&fit=crop&q=80&w=400" alt="Farmers gathering" class="w-full h-full object-cover transition-transform group-hover:scale-110 duration-300">
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white text-xl transition-opacity"><i class="fa-solid fa-expand"></i></div>
+            </div>
+            <div class="relative group overflow-hidden rounded-2xl h-48 bg-gray-200 cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=800')">
+                <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=400" alt="Students digital class" class="w-full h-full object-cover transition-transform group-hover:scale-110 duration-300">
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white text-xl transition-opacity"><i class="fa-solid fa-expand"></i></div>
+            </div>
+            <div class="relative group overflow-hidden rounded-2xl h-48 bg-gray-200 cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1542044896530-05d85be9b11a?auto=format&fit=crop&q=80&w=800')">
+                <img src="https://images.unsplash.com/photo-1542044896530-05d85be9b11a?auto=format&fit=crop&q=80&w=400" alt="Water pipelines" class="w-full h-full object-cover transition-transform group-hover:scale-110 duration-300">
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white text-xl transition-opacity"><i class="fa-solid fa-expand"></i></div>
+            </div>
+        </div>
+
+        <!-- Dynamic Lightbox Modal -->
+        <div id="lightbox-modal" class="fixed inset-0 z-50 bg-black/90 hidden flex items-center justify-center p-4">
+            <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white text-3xl hover:text-saffron-500 transition-colors"><i class="fa-solid fa-xmark"></i></button>
+            <img id="lightbox-img" src="" alt="Enlarged gallery view" class="max-w-full max-h-[85vh] rounded-lg shadow-2xl">
+        </div>
+    </main>
+
+    <!-- VIEW CONTAINER: CONTACT US -->
+    <main id="view-contact" class="view-container hidden fade-in py-16 px-4 max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+            <span class="text-saffron-600 font-bold text-sm uppercase tracking-widest" data-en="CONTACT INFORMATION" data-mr="आमच्याशी संपर्क साधा">आमच्याशी संपर्क साधा</span>
+            <h2 class="text-3xl font-bold font-marathi mt-2 dark:text-white" data-en="Get in Touch with Shiv Sena Office" data-mr="शिवसेना जनसंपर्क कार्यालय व मदत केंद्रे">शिवसेना जनसंपर्क कार्यालय व मदत केंद्रे</h2>
+            <div class="w-16 h-1 bg-saffron-500 mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <!-- Contact Addresses -->
+            <div class="space-y-6">
+                <div class="bg-white dark:bg-zinc-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-zinc-700 flex gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-saffron-100 dark:bg-saffron-950/40 text-saffron-600 flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-location-dot"></i></div>
+                    <div>
+                        <h3 class="font-bold text-lg dark:text-white" data-en="Radhanagari Central Office" data-mr="राधानगरी मुख्य जनसंपर्क कार्यालय">राधानगरी मुख्य जनसंपर्क कार्यालय</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">शिवसेना भवन, बस स्टँड रोड, राधानगरी, कोल्हापूर - ४१६२११</p>
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-zinc-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-zinc-700 flex gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-saffron-100 dark:bg-saffron-950/40 text-saffron-600 flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-phone"></i></div>
+                    <div>
+                        <h3 class="font-bold text-lg dark:text-white" data-en="Emergency Helpline Numbers" data-mr="तातडीची संपर्क केंद्र हेल्पलाईन">तातडीची संपर्क केंद्र हेल्पलाईन</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">तक्रारी, वैयक्तिक समस्या किंवा आपत्ती व्यवस्थापनासाठी कॉल करा:</p>
+                        <p class="text-md font-bold text-saffron-600 dark:text-saffron-400 mt-2">+९१ (०२३१) २४५ ६७८९ / ९८७६५ ४३२१०</p>
+                    </div>
+                </div>
+
+                <div class="h-64 rounded-2xl overflow-hidden border border-gray-200 dark:border-zinc-700 relative bg-gray-200">
+                    <!-- Leaflet Map Mockup with interactive SVG placeholder -->
+                    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&q=80&w=800');"></div>
+                    <div class="absolute inset-0 bg-black/40 flex flex-col justify-center items-center text-white text-center p-4">
+                        <i class="fa-solid fa-map-location-dot text-saffron-500 text-4xl mb-2 animate-bounce"></i>
+                        <span class="font-bold text-lg">Radhanagari constituency Office Map</span>
+                        <a href="https://maps.google.com" target="_blank" class="mt-3 px-4 py-2 bg-saffron-500 hover:bg-saffron-600 text-white rounded-lg text-xs font-bold transition-all shadow-md">Open in Google Maps</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Custom Form feedback message box -->
+            <div class="bg-white dark:bg-zinc-800 p-8 rounded-3xl shadow-lg border border-gray-100 dark:border-zinc-700">
+                <h3 class="text-xl font-bold mb-4 font-marathi text-saffron-600 dark:text-saffron-400" data-en="Drop a Message" data-mr="आपला संदेश पाठवा">आपला संदेश पाठवा</h3>
+                <form id="contact-form" onsubmit="submitContact(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 mb-1">नाव / Full Name</label>
+                        <input type="text" id="con-name" required class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-zinc-700 bg-transparent focus:ring-2 focus:ring-saffron-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 mb-1">ईमेल आयडी / Email Address</label>
+                        <input type="email" id="con-email" required class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-zinc-700 bg-transparent focus:ring-2 focus:ring-saffron-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 mb-1">आपला संदेश / Message</label>
+                        <textarea id="con-msg" rows="4" required class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-zinc-700 bg-transparent focus:ring-2 focus:ring-saffron-500"></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-3 bg-saffron-500 hover:bg-saffron-600 text-white font-bold rounded-lg tracking-wide shadow-md transition-all">संदेश पाठवा (Send Message)</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- VIEW CONTAINER: FAQS -->
+    <main id="view-faqs" class="view-container hidden fade-in py-16 px-4 max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+            <span class="text-saffron-600 font-bold text-sm uppercase tracking-widest" data-en="FREQUENTLY ASKED QUESTIONS" data-mr="नेहमी विचारले जाणारे प्रश्न">नेहमी विचारले जाणारे प्रश्न</span>
+            <h2 class="text-3xl font-bold font-marathi mt-2 dark:text-white" data-en="Help & Support Desk" data-mr="नागरिकांच्या मनातील शंका आणि निरसन">नागरिकांच्या मनातील शंका आणि निरसन</h2>
+            <div class="w-16 h-1 bg-saffron-500 mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div class="space-y-4" id="faq-accordion-group">
+            <!-- FAQ 1 -->
+            <div class="bg-white dark:bg-zinc-800 rounded-2xl shadow-sm border border-gray-100 dark:border-zinc-700 overflow-hidden">
+                <button onclick="toggleFAQ(1)" class="w-full px-6 py-4 text-left font-bold text-slate-800 dark:text-white flex justify-between items-center bg-gray-50/50 dark:bg-zinc-850/50">
+                    <span data-en="How to apply for the Ladki Bahin Yojana through this website?" data-mr="या संकेतस्थळावरून 'लाडकी बहीण' योजनेचा अर्ज कसा करावा?">या संकेतस्थळावरून 'लाडकी बहीण' योजनेचा अर्ज कसा करावा?</span>
+                    <i class="fa-solid fa-chevron-down text-saffron-500 transition-transform duration-300" id="faq-chevron-1"></i>
+                </button>
+                <div id="faq-ans-1" class="hidden px-6 py-4 text-sm text-gray-500 dark:text-gray-400 border-t border-gray-100 dark:border-zinc-700">
+                    तुम्ही आमच्या 'शासकीय योजना' विभागामध्ये जाऊन अधिकृत शासकीय पोर्टलच्या लिंकवर क्लिक करून अर्ज करू शकता. आवश्यक असल्यास आमच्या स्थानिक जनसंपर्क कार्यालयात जाऊन मोफत अर्ज करून घेऊ शकता.
+                </div>
+            </div>
+
+            <!-- FAQ 2 -->
+            <div class="bg-white dark:bg-zinc-800 rounded-2xl shadow-sm border border-gray-100 dark:border-zinc-700 overflow-hidden">
+                <button onclick="toggleFAQ(2)" class="w-full px-6 py-4 text-left font-bold text-slate-800 dark:text-white flex justify-between items-center bg-gray-50/50 dark:bg-zinc-850/50">
+                    <span data-en="How are local grievances tracked and solved?" data-mr="मी नोंदवलेल्या तक्रारीवर किती दिवसात कारवाई होते?">मी नोंदवलेल्या तक्रारीवर किती दिवसात कारवाई होते?</span>
+                    <i class="fa-solid fa-chevron-down text-saffron-500 transition-transform duration-300" id="faq-chevron-2"></i>
+                </button>
+                <div id="faq-ans-2" class="hidden px-6 py-4 text-sm text-gray-500 dark:text-gray-400 border-t border-gray-100 dark:border-zinc-700">
+                    एकदा तक्रार नोंदवल्यानंतर तुम्हाला एक युनिक तिकीट आयडी (Ticket ID) मिळतो. आमची स्थानिक शिवसेना तक्रार निवारण कमिटी ३ ते ७ कामकाजाच्या दिवसात संबंधित विभागाकडून आढावा घेऊन काम पूर्ण करण्याचा प्रयत्न करते.
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- VIEW CONTAINER: PRIVACY POLICY -->
+    <main id="view-privacy" class="view-container hidden fade-in py-16 px-4 max-w-4xl mx-auto dark:text-zinc-100">
+        <h2 class="text-3xl font-bold font-marathi text-saffron-600 mb-6">गोपनीयता धोरण (Privacy Policy)</h2>
+        <div class="bg-white dark:bg-zinc-800 p-8 rounded-3xl shadow-md space-y-4 text-sm leading-relaxed text-gray-600 dark:text-zinc-300">
+            <p><strong>राधानगरी विधानसभा शिवसेना</strong> च्या अधिकृत डिजिटल पोर्टलवर आपले स्वागत आहे. आम्ही आपल्या गोपनीयतेचा पूर्ण आदर करतो.</p>
+            <p>१. माहिती गोळा करणे: तुम्ही सदस्य नोंदणी किंवा तक्रार दाखल करताना दिलेली माहिती (नाव, फोन नंबर, पत्ता इत्यादी) पूर्णपणे सुरक्षित ठेवली जाते.</p>
+            <p>२. माहितीचा वापर: गोळा केलेली माहिती केवळ मतदारसंघाच्या समाजोपयोगी कामांसाठी आणि तुमच्या तक्रारींचे निवारण करण्यासाठी वापरली जाईल. ही माहिती कोणत्याही व्यावसायिक हेतूसाठी विकली किंवा हस्तांतरित केली जात नाही.</p>
+        </div>
+    </main>
+
+    <!-- VIEW CONTAINER: TERMS & CONDITIONS -->
+    <main id="view-terms" class="view-container hidden fade-in py-16 px-4 max-w-4xl mx-auto dark:text-zinc-100">
+        <h2 class="text-3xl font-bold font-marathi text-saffron-600 mb-6">नियम आणि अटी (Terms & Conditions)</h2>
+        <div class="bg-white dark:bg-zinc-800 p-8 rounded-3xl shadow-md space-y-4 text-sm leading-relaxed text-gray-600 dark:text-zinc-300">
+            <p>१. वापर नियम: या संकेतस्थळावरील तक्रार निवारण प्रणालीचा वापर केवळ कायदेशीर आणि वास्तविक मतदारसंघातील नागरिकांच्या समस्या मांडण्यासाठी करावा.</p>
+            <p>२. सदस्यता: डिजिटल सभासद कार्ड केवळ पक्षाभिमुख लोकसहभाग दर्शवण्यासाठी आहे. कार्डचा गैरवापर केल्यास कायदेशीर कारवाई होऊ शकते.</p>
+        </div>
+    </main>
+
+
+    <!-- Professional Footer -->
+    <footer class="bg-zinc-950 text-white pt-16 pb-8 border-t-4 border-saffron-500">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+            <!-- Col 1: About Brand -->
+            <div>
+                <h4 class="font-marathi text-xl font-bold text-saffron-500 flex items-center gap-2 mb-4">
+                    <svg class="w-6 h-6" viewBox="0 0 100 100" fill="currentColor">
+                        <path d="M15 50 C 15 25, 85 25, 85 50 C 85 75, 15 75, 15 50" stroke="none"/>
+                        <path d="M8 50 L 92 50 M 76 38 L 92 50 L 76 62" stroke="white" stroke-width="8" stroke-linecap="round"/>
+                    </svg>
+                    <span>शिवसेना राधानगरी</span>
+                </h4>
+                <p class="text-xs text-gray-400 leading-relaxed mb-4">
+                    हिंदुहृदयसम्राट बाळासाहेब ठाकरे यांच्या ८०% समाजकारण आणि २०% राजकारण या तत्त्वाने अविरत कार्यरत. मतदारसंघाच्या समृद्धीचे संकल्पपर्व!
+                </p>
+                <div class="flex gap-3">
+                    <a href="https://facebook.com" class="w-8 h-8 rounded-full bg-zinc-800 hover:bg-saffron-500 flex items-center justify-center transition-colors"><i class="fa-brands fa-facebook-f text-sm"></i></a>
+                    <a href="https://twitter.com" class="w-8 h-8 rounded-full bg-zinc-800 hover:bg-saffron-500 flex items-center justify-center transition-colors"><i class="fa-brands fa-x-twitter text-sm"></i></a>
+                    <a href="https://instagram.com" class="w-8 h-8 rounded-full bg-zinc-800 hover:bg-saffron-500 flex items-center justify-center transition-colors"><i class="fa-brands fa-instagram text-sm"></i></a>
+                    <a href="https://youtube.com" class="w-8 h-8 rounded-full bg-zinc-800 hover:bg-saffron-500 flex items-center justify-center transition-colors"><i class="fa-brands fa-youtube text-sm"></i></a>
+                </div>
+            </div>
+
+            <!-- Col 2: Useful links -->
+            <div>
+                <h4 class="text-sm font-bold uppercase tracking-wider text-saffron-500 mb-4" data-en="Useful Links" data-mr="महत्वाचे दुवे">महत्वाचे दुवे</h4>
+                <ul class="text-xs text-gray-400 space-y-2">
+                    <li><a href="#about" onclick="navigateTo('about')" class="hover:text-white transition-colors">मतदारसंघ माहिती</a></li>
+                    <li><a href="#leadership" onclick="navigateTo('leadership')" class="hover:text-white transition-colors">आमचे नेते व मार्गदर्शक</a></li>
+                    <li><a href="#development" onclick="navigateTo('development')" class="hover:text-white transition-colors">झालेली विकासकामे</a></li>
+                    <li><a href="#schemes" onclick="navigateTo('schemes')" class="hover:text-white transition-colors">सरकारी योजना यादी</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 3: Legal & Helpdesk -->
+            <div>
+                <h4 class="text-sm font-bold uppercase tracking-wider text-saffron-500 mb-4" data-en="Help & Policy" data-mr="मदत व धोरणे">मदत व धोरणे</h4>
+                <ul class="text-xs text-gray-400 space-y-2">
+                    <li><a href="#faqs" onclick="navigateTo('faqs')" class="hover:text-white transition-colors">नेहमी विचारले जाणारे प्रश्न</a></li>
+                    <li><a href="#privacy" onclick="navigateTo('privacy')" class="hover:text-white transition-colors">गोपनीयता धोरण</a></li>
+                    <li><a href="#terms" onclick="navigateTo('terms')" class="hover:text-white transition-colors">नियम व अटी</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 4: Emergency Contacts -->
+            <div>
+                <h4 class="text-sm font-bold uppercase tracking-wider text-saffron-500 mb-4" data-en="Emergency Helplines" data-mr="आपत्कालीन मदत क्रमांक">आपत्कालीन मदत क्रमांक</h4>
+                <div class="text-xs text-gray-400 space-y-3">
+                    <p class="border-b border-zinc-800 pb-1">
+                        <span class="block font-bold text-white">राधानगरी पोलीस स्टेशन</span>
+                        <span>०२३१ - २४५०३३</span>
+                    </p>
+                    <p class="border-b border-zinc-800 pb-1">
+                        <span class="block font-bold text-white">ग्रामीण रुग्णालय (Ambulance)</span>
+                        <span>१०२ / ९४२२३ ७८१९०</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 border-t border-zinc-900 pt-6 flex flex-col md:flex-row items-center justify-between text-xs text-gray-500">
+            <p>© २०२६ राधानगरी विधानसभा शिवसेना. सर्व हक्क राखीव. (Developed as static prototype for Assembly digital initiative).</p>
+            <p class="mt-2 md:mt-0">भगवा आमचा श्वास!</p>
+        </div>
+    </footer>
+
+
+    <!-- Floating Helpline and Scroll to Top buttons -->
+    <div class="fixed bottom-6 left-6 z-40 flex flex-col gap-2">
+        <!-- Interactive Emergency Overlay Toggle -->
+        <button onclick="toggleHelplineOverlay()" class="w-12 h-12 rounded-full bg-red-600 hover:bg-red-700 text-white flex items-center justify-center shadow-lg transition-all transform hover:scale-110 active:scale-95" aria-label="Toggle emergency contacts">
+            <i class="fa-solid fa-phone-volume text-lg"></i>
+        </button>
+    </div>
+
+    <div class="fixed bottom-6 right-6 z-40 flex flex-col gap-2">
+        <button onclick="scrollToTop()" id="scroll-top-btn" class="w-12 h-12 rounded-full bg-saffron-500 hover:bg-saffron-600 text-white flex items-center justify-center shadow-lg opacity-0 pointer-events-none transition-all duration-300 transform hover:scale-110 active:scale-95" aria-label="Scroll to top">
+            <i class="fa-solid fa-arrow-up text-lg"></i>
+        </button>
+    </div>
+
+    <!-- Quick Help & Emergency Overlay Modal Container -->
+    <div id="helpline-overlay" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-zinc-900 rounded-3xl w-full max-w-md p-6 relative border-t-8 border-red-600">
+            <button onclick="toggleHelplineOverlay()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:hover:text-white text-xl"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="text-xl font-bold font-marathi text-red-600 mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <span data-en="Constituency Emergency Desk" data-mr="राधानगरी आपत्कालीन मदत केंद्र">राधानगरी आपत्कालीन मदत केंद्र</span>
+            </h3>
+            <p class="text-xs text-gray-500 dark:text-gray-400 mb-4" data-en="Direct lines for critical assistance" data-mr="आपल्याला कोणत्याही संकटाच्या वेळी मदतीसाठी २४ तास उपलब्ध संपर्क क्रमांक">आपल्याला कोणत्याही संकटाच्या वेळी मदतीसाठी २४ तास उपलब्ध संपर्क क्रमांक</p>
+            <div class="space-y-3 text-sm">
+                <div class="flex justify-between items-center bg-gray-50 dark:bg-zinc-800 p-3 rounded-xl border border-gray-200 dark:border-zinc-700">
+                    <span class="font-semibold text-slate-800 dark:text-white" data-en="Ambulance Service" data-mr="रुग्णवाहिका सेवा (२४ तास)">रुग्णवाहिका सेवा (२४ तास)</span>
+                    <a href="tel:9876543210" class="text-red-600 font-bold hover:underline">+९१ ९८७६५ ४३२१०</a>
+                </div>
+                <div class="flex justify-between items-center bg-gray-50 dark:bg-zinc-800 p-3 rounded-xl border border-gray-200 dark:border-zinc-700">
+                    <span class="font-semibold text-slate-800 dark:text-white" data-en="Disaster Management Desk" data-mr="पूर / दरड आपत्ती कक्ष">पूर / दरड आपत्ती कक्ष</span>
+                    <a href="tel:9988776655" class="text-red-600 font-bold hover:underline">+९१ ९९८८७ ७६६५५</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie / Privacy Consent Popup -->
+    <div id="cookie-banner" class="fixed bottom-6 left-6 right-6 lg:left-auto lg:max-w-md z-50 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 p-5 rounded-2xl shadow-2xl hidden flex flex-col gap-4">
+        <div class="flex gap-3">
+            <i class="fa-solid fa-cookie-bite text-2xl text-saffron-500"></i>
+            <div>
+                <h4 class="font-bold text-sm dark:text-white" data-en="Your Privacy Matters" data-mr="आम्ही तुमची गोपनीयता जपतो">आम्ही तुमची गोपनीयता जपतो</h4>
+                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1 leading-normal">आम्ही आमच्या डिजिटल दालनात उत्तम अनुभव देण्यासाठी कुकीजचा वापर करतो. संमती देण्यासाठी खालील बटण दाबा.</p>
+            </div>
+        </div>
+        <div class="flex justify-end gap-2 text-xs font-bold">
+            <button onclick="rejectCookies()" class="px-3 py-1.5 text-gray-500 hover:text-slate-800 dark:hover:text-white">नाकारायचे</button>
+            <button onclick="acceptCookies()" class="px-4 py-2 bg-saffron-500 text-white rounded-lg hover:bg-saffron-600 transition-all shadow-md">मान्य आहे (Accept)</button>
+        </div>
+    </div>
+
+
+    <!-- JavaScript Application Controller -->
+    <script>
+        // Core localization dictionary database (Bilingual translation mechanism)
+        const translations = {
+            en: {
+                "LATEST": "IMPORTANT",
+                "brand-subtext": "Radhanagari Assembly",
+                "Home": "Home",
+                "Constituency": "Constituency",
+                "Leadership": "Leadership",
+                "Development": "Development Works",
+                "Schemes": "Gov Schemes",
+                "Villages": "Villages Directory",
+                "Complaint Portal": "Grievance Portal",
+                "Join Us": "Join Us",
+                "OUR LEADERS": "OUR LEADERS",
+                "Inspiring Pioneers of Hindutva": "Constituency & Core Ideology",
+                "CITIZEN SERVICES": "ONLINE SERVICES HELPDESK",
+                "Empowering & Assisting Local Communities": "Direct Community Actions & Aid",
+                "Complaint Portal": "Citizen Complaint Portal",
+                "Report a local issue or request emergency constituency help directly.": "Directly post community, crop, or roadway grievances.",
+                "Sarkari Yojana Finder": "Government Welfare Directory",
+                "Find details of state schemes & download official program forms.": "Find out your Ladki Bahin, Farmer scheme eligibilities instantly.",
+                "Our Villages Directory": "Villages & Demographics",
+                "Check progress reports, local booths and village developments.": "Interactive map database of all assembly localities.",
+                "Volunteer Network": "Shiv Sena Volunteer Force",
+                "Become an active volunteer for constituency social works.": "Join hands for emergency and village social projects.",
+                "Submit Grievance": "Submit Grievance",
+                "Check Schemes": "Verify Schemes",
+                "Search Villages": "Find Localities",
+                "Register Now": "Enlist Now",
+                "Upcoming Events": "Scheduled Camps & Meetings",
+                "Janata Darbar at Radhanagari Head Office": "Janata Darbar - Central Office",
+                "Direct grievance resolution meeting with the leadership team.": "Directly interact with representatives to tackle constituency matters.",
+                "Free Medical Camp - Bhudargad Taluka": "Free Medical Health Checkup Camp",
+                "Experienced cardiologists & doctors conducting checkups.": "Free medicines, diagnostics, and cardiac care experts.",
+                "ABOUT RADHANAGARI": "ABOUT CONSTITUENCY",
+                "Radhanagari Vidhansabha Constituency": "Scenic & Prosperous Assembly",
+                "A Blend of History, Nature, & Progress": "Historical & Regional Milestones",
+                "Radhanagari constituency stands as an asset of Maharashtra, famous for its historic Radhanagari Dam built by Chhatrapati Shahu Maharaj, fertile fields, pristine forest sanctuaries, and hardworking farming communities.": "Chhatrapati Shahu Maharaj envisioned the Lakshmi reservoir, bolstering regional farming and prosperity. It is home to brave farming families.",
+                "३ तालुके": "3 Talukas",
+                "४ लाख+": "400K+ Voters",
+                "Radhanagari, Bhudargad, Ajara": "Radhanagari, Bhudargad, Ajara",
+                "Eligible Voters": "Educated Electorate",
+                "Radhanagari Reservoir": "Lakshmi Reservoir",
+                "Our Vision & Historical Milestones": "Historical Development Journey",
+                "2014 - पायाभरणी": "2014 - Foundations",
+                "Historic Assembly Victory": "Historic Vidhansabha Victory",
+                "First major breakthrough, promising modern water pipelines and better local roads.": "Citizens opted for Shiv Sena's promise of robust infrastructure.",
+                "2019 - विकासपर्व": "2019 - Infrastructure Boost",
+                "Water & Road Infrastructure": "Concrete Road & Water Networks",
+                "Inauguration of major water supply systems and concrete rural roads across three talukas.": "Commissioned 23 concrete regional check-dams and links.",
+                "2024-2026 - डिजिटल व स्वावलंबी पर्व": "2024-2026 - Digital & Self-Reliant Era",
+                "Digital & Sustainable Radhanagari": "Smart Villages & Youth Empowerment",
+                "Initiating the constituency digital network, instant grievance processing, and massive volunteer groups.": "Introducing interactive local cards, volunteer circles, and digital feedback.",
+                "OUR GUIDES & LEADER PROFILE": "SENA LEADERSHIP",
+                "Dedicated to the People of Radhanagari": "Core Guides and Local Representative",
+                "Our development goal is basic - prosperity to the last village and smiles to the last face.": "Our mission is simple - pure water, safe roads, and high-quality education to the last pocket.",
+                "DEVELOPMENT PROJECTS": "DEVELOPMENT DASHBOARD",
+                "Transforming the Assembly Constituency": "Ongoing & Completed Schemes",
+                "23 Kolhapur Type Bandharas Restored": "23 Check-Dams Completely Renovated",
+                "Ensuring year-round water supply for agriculture and animal husbandry in local Radhanagari farming areas.": "Stabilizing round-the-clock water and farming support channels.",
+                "Radhanagari to Ajara Major Highway Connecting Road": "Radhanagari - Ajara Highway Resurfacing",
+                "Widening and resurfacing of the main ghat linking highways, ensuring safe transportation during monsoons.": "Providing heavy-duty asphalt layers for accident-free monsoons.",
+                "Digital Classrooms in 45 ZP Schools": "Digital Classrooms in 45 Primary Schools",
+                "Providing modern laptops, projectors, and clean drinking water plants to high-altitude rural schools.": "Delivering smart screens, notebooks, and water filters to hill communities.",
+                "MAHARASHTRA GOVT SCHEMES": "MAHARASHTRA STATE SCHEMES",
+                "Welfare Programs & Benefits Portal": "Interactive Welfare Schemes Directory",
+                "मुख्यमंत्री माझी लाडकी बहीण योजना": "Ladki Bahin Direct Assistance Scheme",
+                "नमो शेतकरी महासन्मान निधी योजना": "Namo Farmer Direct Support Scheme",
+                "मुख्यमंत्री युवा कार्यप्रशिक्षण योजना": "Youth Apprentice Training Program",
+                "RADHANAGARI ASSEMBLY VILLAGES": "CONSTITUENCY VILLAGES DIRECTORY",
+                "Search Villages Directory & Booths": "Lookup Villages, Electoral Booths & Projects",
+                "Village Name": "Village Name",
+                "Taluka": "Taluka",
+                "Booth Count": "Booth Center",
+                "Status": "Status",
+                "CITIZEN GRIVANCE PORTAL": "CITIZEN HELPDESK & SYSTEM",
+                "Submit & Track Complaints Online": "Transparent Grievance Resolution Desk",
+                "New Complaint Form": "Register Grievance",
+                "Citizen Name": "Your Full Name",
+                "Phone": "Mobile Phone",
+                "Village": "Village / Location",
+                "Category": "Department / Category",
+                "Description": "Explain the Issue",
+                "Track Complaint": "Track Your Grievance",
+                "Enter ticket ID below to track resolution updates.": "Enter your issued SHIV Ticket ID below to track progress.",
+                "ONLINE MEMBERSHIP": "SENA DIGITAL REGISTRATION",
+                "Get Your Digital Shiv Sena Card": "Get Your Official Digital Membership Card",
+                "Membership Details": "Membership Registration Form",
+                "Your Full Name": "Your Name",
+                "Mobile No": "Mobile Number",
+                "Blood Group": "Blood Group",
+                "Print / Save PDF Card": "Download Digital Member Card",
+                "VOLUNTEER FORCE": "VOLUNTEER DEFENSE",
+                "Register as a Local Volunteer": "Register & Shape Constituency Progress",
+                "PHOTO & VIDEO GALLERY": "CONSTITUENCY MEDIA GALLERY",
+                "Visual Journey of Radhanagari constituency": "Latest Event Images & Developmental Records",
+                "CONTACT INFORMATION": "CENTRAL ASSEMBLY CONTACTS",
+                "Get in Touch with Shiv Sena Office": "Shiv Sena Central Offices & Emergency desks",
+                "Radhanagari Central Office": "Radhanagari Main Assembly Office",
+                "Emergency Helpline Numbers": "Assembly 24/7 Citizen Helplines",
+                "Drop a Message": "Send Direct Message",
+                "FREQUENTLY ASKED QUESTIONS": "FREQUENTLY ASKED QUESTIONS",
+                "Help & Support Desk": "Citizen Questions & Resolution Desk",
+                "How to apply for the Ladki Bahin Yojana through this website?": "How can I apply for the Ladki Bahin Scheme here?",
+                "How are local grievances tracked and solved?": "How long does it take for a grievance to get resolved?"
+            },
+            mr: {
+                "LATEST": "महत्वाचे",
+                "brand-subtext": "राधानगरी विधानसभा",
+                "Home": "मुख्यपृष्ठ",
+                "Constituency": "मतदारसंघ",
+                "Leadership": "नेतृत्व",
+                "Development": "विकासकामे",
+                "Schemes": "शासकीय योजना",
+                "Villages": "गावे",
+                "Complaint Portal": "तक्रार निवारण",
+                "Join Us": "सदस्य व्हा",
+                "OUR LEADERS": "आमचे मार्गदर्शक",
+                "Inspiring Pioneers of Hindutva": "शिवसेनेचे अखंड ऊर्जास्त्रोत",
+                "CITIZEN SERVICES": "नागरिक सेवा केंद्र",
+                "Empowering & Assisting Local Communities": "थेट लोकसहभाग आणि जलद सहाय्यता",
+                "Complaint Portal": "तक्रार निवारण कक्ष",
+                "Report a local issue or request emergency constituency help directly.": "आपल्या समस्या, प्रश्न किंवा गावांमधील अडचणी थेट प्रशासनाकडे पाठवा.",
+                "Sarkari Yojana Finder": "शासकीय योजना माहिती",
+                "Find details of state schemes & download official program forms.": "लाडकी बहीण योजना, शेतकरी सन्मान निधी आणि इतर योजनांची पात्रता जाणून घ्या.",
+                "Our Villages Directory": "आपले गावे आणि लोकसंख्या",
+                "Check progress reports, local booths and village developments.": "राधानगरी मतदारसंघातील प्रत्येक गावचा इतिहास, समस्या व विकास आढावा.",
+                "Volunteer Network": "शिवसैनिक स्वयंसेवक",
+                "Become an active volunteer for constituency social works.": "मतदारसंघातील विविध सामाजिक उपक्रम आणि युवा संघटनांसाठी नोंदणी करा.",
+                "Submit Grievance": "तक्रार दाखल करा",
+                "Check Schemes": "योजना तपासा",
+                "Search Villages": "गाव शोधा",
+                "Register Now": "सहभागी व्हा",
+                "Upcoming Events": "नियोजित कार्यक्रम व बैठका",
+                "Janata Darbar at Radhanagari Head Office": "जनता दरबार - राधानगरी मुख्य जनसंपर्क कार्यालय",
+                "Direct grievance resolution meeting with the leadership team.": "नागरिकांच्या समस्या निवारणासाठी थेट भेट आणि सविस्तर चर्चा सत्र.",
+                "Free Medical Camp - Bhudargad Taluka": "मोफत भव्य आरोग्य शिबिर - भुदरगड",
+                "Experienced cardiologists & doctors conducting checkups.": "अनुभवी डॉक्टरांच्या टीमद्वारे मोफत तपासणी, औषध वाटप आणि समुपदेशन.",
+                "ABOUT RADHANAGARI": "आमच्या मतदारसंघाची माहिती",
+                "Radhanagari Vidhansabha Constituency": "निसर्गरम्य आणि समृद्ध मतदारसंघ",
+                "A Blend of History, Nature, & Progress": "ऐतिहासिक पार्श्वभूमी व भौगोलिक महत्त्व",
+                "Radhanagari constituency stands as an asset of Maharashtra, famous for its historic Radhanagari Dam built by Chhatrapati Shahu Maharaj, fertile fields, pristine forest sanctuaries, and hardworking farming communities.": "छत्रपती राजर्षी शाहू महाराजांच्या ऐतिहासिक दूरदृष्टीतून साकारलेले राधानगरी धरण, समृद्ध शेती, अभयारण्ये आणि स्वाभिमानी शिवसैनिकांची ही भूमी आहे.",
+                "३ तालुके": "३ तालुके",
+                "४ लाख+": "४ लाख+ सुशिक्षित मतदार",
+                "Radhanagari, Bhudargad, Ajara": "राधानगरी, भुदरगड, आजरा",
+                "Eligible Voters": "सुशिक्षित मतदार",
+                "Radhanagari Reservoir": "राधानगरी जलाशय (लक्ष्मी तलाव)",
+                "Our Vision & Historical Milestones": "शिवसेना मतदारसंघातील प्रदीर्घ विकास प्रवास",
+                "2014 - पायाभरणी": "2014 - पायाभरणी",
+                "Historic Assembly Victory": "शिवसेनेच्या भगव्याचा दणदणीत विजय",
+                "First major breakthrough, promising modern water pipelines and better local roads.": "मतदारसंघातील जनतेने बदल स्वीकारत शिवसेनेला संधी दिली; गावागावात पायाभूत कामांची मुहूर्तमेढ रोवली.",
+                "2019 - विकासपर्व": "2019 - विकासपर्व",
+                "Water & Road Infrastructure": "कोल्हापुरी पद्धतीचे बंधारे आणि शेतीला बळ",
+                "Inauguration of major water supply systems and concrete rural roads across three talukas.": "कृषी पंढरीसाठी सिंचन व्यवस्था भक्कम करत २३+ नवीन बंधारे आणि रस्ते कामांचे भूमिपूजन संपन्न झाले.",
+                "2024-2026 - डिजिटल व स्वावलंबी पर्व": "2024-2026 - डिजिटल व स्वावलंबी पर्व",
+                "Digital & Sustainable Radhanagari": "स्मार्ट गावे आणि युवा रोजगाराची क्रांती",
+                "Initiating the constituency digital network, instant grievance processing, and massive volunteer groups.": "थेट डिजिटल माध्यम प्रणालीद्वारे जोडलेले नागरिक; गावे थेट संपर्क यंत्रणेत सहभागी.",
+                "OUR GUIDES & LEADER PROFILE": "आमचे मार्गदर्शक व नेतृत्व",
+                "Dedicated to the People of Radhanagari": "पक्षाचे प्रमुख मार्गदर्शक आणि स्थानिक प्रतिनिधी",
+                "Our development goal is basic - prosperity to the last village and smiles to the last face.": "आपले ध्येय स्पष्ट आहे - शेवटच्या दुर्गम वाडीवस्तीपर्यंत रस्ता, मुबलक पाणी आणि दर्जेदार शिक्षण पोहोचवणे.",
+                "DEVELOPMENT PROJECTS": "विकासकामांचा प्रगती अहवाल",
+                "Transforming the Assembly Constituency": "पारदर्शक कारभार आणि झालेली विकासकामे",
+                "23 Kolhapur Type Bandharas Restored": "२३ कोल्हापुरी पद्धतीचे बंधारे दुरुस्ती",
+                "Ensuring year-round water supply for agriculture and animal husbandry in local Radhanagari farming areas.": "शेतीसाठी बाराही महिने पाणी उपलब्ध करण्यासाठी राधानगरी व भुदरगड परिसरातील जुन्या बंधाऱ्यांची यशस्वी पुनर्रचना व दुरुस्ती.",
+                "Radhanagari to Ajara Major Highway Connecting Road": "राधानगरी ते आजरा जोड महामार्ग डांबरीकरण",
+                "Widening and resurfacing of the main ghat linking highways, ensuring safe transportation during monsoons.": "पावसाळ्यात दरडी कोसळण्याची भीती कमी करण्यासाठी नवीन तंत्रज्ञानासह घाटरस्ते आणि मुख्य महामार्ग जोडणी काम सुरू.",
+                "Digital Classrooms in 45 ZP Schools": "४५ जिल्हा परिषद शाळांमध्ये डिजिटल वर्गखोल्या",
+                "Providing modern laptops, projectors, and clean drinking water plants to high-altitude rural schools.": "ग्रामीण व डोंगराळ भागातील मुलांसाठी संगणक लॅब, डिजिटल ई-लर्निंग सिस्टीम आणि शुद्ध पिण्याच्या पाण्याच्या सोयी.",
+                "MAHARASHTRA GOVT SCHEMES": "शासकीय जनहितकारी योजना",
+                "Welfare Programs & Benefits Portal": "आपल्यासाठी शासकीय योजनांची अचूक माहिती",
+                "मुख्यमंत्री माझी लाडकी बहीण योजना": "मुख्यमंत्री माझी लाडकी बहीण योजना",
+                "नमो शेतकरी महासन्मान निधी योजना": "नमो शेतकरी महासन्मान निधी योजना",
+                "मुख्यमंत्री युवा कार्यप्रशिक्षण योजना": "मुख्यमंत्री युवा कार्यप्रशिक्षण योजना",
+                "RADHANAGARI ASSEMBLY VILLAGES": "मतदारसंघातील गावे",
+                "Search Villages Directory & Booths": "आपली गावे - प्रभाग आणि लोकसंख्या शोधक",
+                "Village Name": "गावचे नाव",
+                "Taluka": "तालुका",
+                "Booth Count": "मतदान केंद्र",
+                "Status": "विकास स्थिती",
+                "CITIZEN GRIVANCE PORTAL": "थेट मदत व तक्रार कक्ष",
+                "Submit & Track Complaints Online": "समस्या मांडा, प्रशासनाकडून उत्तर मिळवा",
+                "New Complaint Form": "नवीन तक्रार अर्ज",
+                "Citizen Name": "नाव",
+                "Phone": "मोबाईल नंबर",
+                "Village": "गाव / प्रभाग",
+                "Category": "समस्येचा प्रकार",
+                "Description": "समस्या सविस्तर वर्णन करा",
+                "Track Complaint": "तक्रारीची स्थिती तपासा",
+                "Enter ticket ID below to track resolution updates.": "आपल्याला मिळालेला तक्रार कोड खालील रकान्यात टाकून प्रगती पहा.",
+                "ONLINE MEMBERSHIP": "शिवसेना डिजिटल नोंदणी",
+                "Get Your Digital Shiv Sena Card": "शिवसेनेचे अधिकृत डिजिटल सभासद कार्ड मिळवा",
+                "Membership Details": "सभासद नोंदणी अर्ज",
+                "Your Full Name": "नाव",
+                "Mobile No": "मोबाईल क्रमांक",
+                "Blood Group": "रक्तगट (Blood Group)",
+                "Print / Save PDF Card": "सदस्य कार्ड प्रिंट करा",
+                "VOLUNTEER FORCE": "शिवसेना स्वयंसेवक सैन्य",
+                "Register as a Local Volunteer": "मतदारसंघाच्या विकासकार्यात आपले योगदान द्या",
+                "PHOTO & VIDEO GALLERY": "छायाचित्र व व्हिडिओ गॅलरी",
+                "Visual Journey of Radhanagari constituency": "विविध सामाजिक कार्यक्रम व विकास कामांची क्षणचित्रे",
+                "CONTACT INFORMATION": "आमच्याशी संपर्क साधा",
+                "Get in Touch with Shiv Sena Office": "शिवसेना जनसंपर्क कार्यालय व मदत केंद्रे",
+                "Radhanagari Central Office": "राधानगरी मुख्य जनसंपर्क कार्यालय",
+                "Emergency Helpline Numbers": "तातडीची संपर्क केंद्र हेल्पलाईन",
+                "Drop a Message": "आपला संदेश पाठवा",
+                "FREQUENTLY ASKED QUESTIONS": "नेहमी विचारले जाणारे प्रश्न",
+                "Help & Support Desk": "नागरिकांच्या मनातील शंका आणि निरसन",
+                "How to apply for the Ladki Bahin Yojana through this website?": "या संकेतस्थळावरून 'लाडकी बहीण' योजनेचा अर्ज कसा करावा?",
+                "How are local grievances tracked and solved?": "मी नोंदवलेल्या तक्रारीवर किती दिवसात कारवाई होते?"
+            }
+        };
+
+        // Complete mock village census database
+        const villageDatabase = [
+            { name: "सोळंकुर (Solankur)", taluka: "राधानगरी (Radhanagari)", booth: "२ केंद्रे", status: "स्मार्ट व्हिलेज" },
+            { name: "कसबा वाळवे (Kasba Walve)", taluka: "राधानगरी (Radhanagari)", booth: "४ केंद्रे", status: "रस्ते पूर्ण" },
+            { name: "गारगोटी (Gargoti)", taluka: "भुदरगड (Bhudargad)", booth: "६ केंद्रे", status: "मुख्य केंद्र" },
+            { name: "कडगाव (Kadgaon)", taluka: "भुदरगड (Bhudargad)", booth: "३ केंद्रे", status: "बंधारे दुरुस्त" },
+            { name: "उत्तूर (Uttur)", taluka: "आजरा (Ajara)", booth: "४ केंद्रे", status: "शुद्ध जल" },
+            { name: "तारळे (Tarale)", taluka: "राधानगरी (Radhanagari)", booth: "२ केंद्रे", status: "प्रगतीपथावर" },
+            { name: "पिंपळगाव (Pimpalgaon)", taluka: "भुदरगड (Bhudargad)", booth: "१ केंद्र", status: "पूर्ण जोडणी" },
+            { name: "आजरा (Ajara)", taluka: "आजरा (Ajara)", booth: "५ केंद्रे", status: "मुख्य शहर" }
+        ];
+
+        // Active State Controllers
+        let currentLanguage = 'mr';
+        let currentSlideIndex = 0;
+
+        window.onload = function() {
+            // Hide loading loader with smooth fade transition
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                loader.classList.add('opacity-0');
+                setTimeout(() => loader.style.display = 'none', 500);
+            }, 800);
+
+            // Set up active router system from window hash
+            const defaultHash = window.location.hash || '#home';
+            const cleanView = defaultHash.replace('#', '');
+            navigateTo(cleanView);
+
+            // Populate localized scrolling news announcements ticker elements
+            setupTickerAnnouncements();
+
+            // Populate village interactive lookup search directory tables
+            renderVillages(villageDatabase);
+
+            // Auto transition hero slideshow carousel
+            setInterval(() => nextSlide(), 5000);
+
+            // Monitor browser scrolling height to toggle back-to-top buttons
+            window.addEventListener('scroll', handleWindowScroll);
+
+            // Display cookie banner after short delay if not yet dismissed
+            if (!localStorage.getItem('cookies-accepted')) {
+                setTimeout(() => document.getElementById('cookie-banner').classList.remove('hidden'), 2000);
+            }
+
+            // Fire continuous random electoral signups to simulate portal activity
+            startMockEventLivestream();
+
+            // Setup dark mode preferences from system settings / localStorage
+            if (localStorage.getItem('dark-mode') === 'enabled' || (!localStorage.getItem('dark-mode') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            }
+
+            // Sync complaint log
+            updateComplaintLog();
+        }
+
+        // Multi-lingual translation engine
+        document.getElementById('lang-switch').addEventListener('click', function() {
+            currentLanguage = currentLanguage === 'mr' ? 'en' : 'mr';
+            this.querySelector('#lang-label').innerText = currentLanguage === 'mr' ? 'EN' : 'MR';
+            
+            // Iterate over all elements possessing translation data tokens
+            document.querySelectorAll('[data-mr]').forEach(element => {
+                element.innerText = element.getAttribute(`data-${currentLanguage}`);
+            });
+
+            // Handle special search placeholders translation updates
+            const searchField = document.getElementById('village-search');
+            if (searchField) {
+                searchField.placeholder = currentLanguage === 'mr' ? 'गाव किंवा तालुक्याचे नाव शोधा (उदा: सोळंकुर)...' : 'Search village name...';
+            }
+        });
+
+        // Toggle Dark Mode
+        document.getElementById('dark-mode-toggle').addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('dark-mode', 'disabled');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('dark-mode', 'enabled');
+            }
+        });
+
+        // Mobile Menu Button Toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                icon.className = 'fa-solid fa-xmark text-xl';
+            } else {
+                menu.classList.add('hidden');
+                icon.className = 'fa-solid fa-bars text-xl';
+            }
+        });
+
+        // SPA View Router Switching logic
+        function navigateTo(viewId) {
+            // Close mobile menu if active
+            document.getElementById('mobile-menu').classList.add('hidden');
+            document.getElementById('menu-icon').className = 'fa-solid fa-bars text-xl';
+
+            // Hide all views
+            document.querySelectorAll('.view-container').forEach(view => {
+                view.classList.add('hidden');
+            });
+
+            // Target view mapping logic
+            const targetView = document.getElementById(`view-${viewId}`);
+            if (targetView) {
+                targetView.classList.remove('hidden');
+                window.location.hash = viewId;
+            } else {
+                document.getElementById('view-home').classList.remove('hidden');
+            }
+
+            // Sync menu tabs active highlights
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active-nav');
+                if (link.getAttribute('href') === `#${viewId}`) {
+                    link.classList.add('active-nav');
+                }
+            });
+
+            // Scroll to the very top smoothly
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Hero Slider Carousel Transitions
+        function prevSlide() {
+            const slides = document.querySelectorAll('.hero-slide');
+            slides[currentSlideIndex].classList.replace('opacity-100', 'opacity-0');
+            currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+            slides[currentSlideIndex].classList.replace('opacity-0', 'opacity-100');
+        }
+
+        function nextSlide() {
+            const slides = document.querySelectorAll('.hero-slide');
+            if (slides.length) {
+                slides[currentSlideIndex].classList.replace('opacity-100', 'opacity-0');
+                currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+                slides[currentSlideIndex].classList.replace('opacity-0', 'opacity-100');
+            }
+        }
+
+        // Ticker live headlines populating
+        function setupTickerAnnouncements() {
+            const tickerBox = document.getElementById('news-ticker-text');
+            const messages = [
+                "राधानगरी धरण पाणी साठा १००% भरला; पाणी सोडण्याची वेळ निश्चित.  |  ",
+                "मुख्यमंत्री लाडकी बहीण योजनेची अंतिम मुदत वाढवली; अर्ज प्रक्रिया सुरू.  |  ",
+                "गारगोटी ते आजरा महामार्गाच्या निविदेला मंजुरी, २३ कोटी निधी मंजूर.  |  ",
+                "२५ जुलै रोजी भुदरगड तालुक्यात भव्य आरोग्य शिबिराचे आयोजन."
+            ];
+            tickerBox.innerHTML = messages.join(' &nbsp; &nbsp; • &nbsp; &nbsp; ');
+        }
+
+        // Render village lookup tables
+        function renderVillages(list) {
+            const tableBody = document.getElementById('village-list-table');
+            tableBody.innerHTML = '';
+            
+            if (list.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="4" class="p-6 text-center text-gray-400 italic">कोणतेही गाव आढळले नाही.</td></tr>`;
+                return;
+            }
+
+            list.forEach(v => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50 dark:hover:bg-zinc-800 text-xs sm:text-sm";
+                tr.innerHTML = `
+                    <td class="p-4 font-bold dark:text-zinc-100">${v.name}</td>
+                    <td class="p-4 text-gray-500 dark:text-gray-400">${v.taluka}</td>
+                    <td class="p-4 text-gray-500 dark:text-gray-400"><i class="fa-solid fa-person-booth text-saffron-500 mr-1.5"></i>${v.booth}</td>
+                    <td class="p-4"><span class="px-2 py-1 rounded bg-green-100 dark:bg-green-950/40 text-green-700 dark:text-green-400 text-xs font-bold">${v.status}</span></td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+
+        // Live Search filtration inside village directory
+        function searchVillages() {
+            const query = document.getElementById('village-search').value.toLowerCase();
+            const filtered = villageDatabase.filter(v => 
+                v.name.toLowerCase().includes(query) || v.taluka.toLowerCase().includes(query)
+            );
+            renderVillages(filtered);
+        }
+
+        // Live filtration of development projects on tab select
+        function filterDevWorks(category) {
+            // Update active state inside buttons
+            document.querySelectorAll('#dev-project-filters button').forEach(btn => {
+                btn.classList.remove('bg-saffron-600', 'text-white');
+                btn.classList.add('bg-white', 'dark:bg-zinc-800', 'text-slate-700', 'dark:text-zinc-300');
+                if (btn.getAttribute('data-filter') === category) {
+                    btn.classList.remove('bg-white', 'dark:bg-zinc-800', 'text-slate-700', 'dark:text-zinc-300');
+                    btn.classList.add('bg-saffron-600', 'text-white');
+                }
+            });
+
+            // Hide/Show target elements
+            document.querySelectorAll('.dev-card-item').forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+
+        // Government Schemes search logic
+        function searchSchemes() {
+            const query = document.getElementById('scheme-search').value.toLowerCase();
+            document.querySelectorAll('.scheme-card').forEach(card => {
+                const title = card.querySelector('.scheme-title').innerText.toLowerCase();
+                if (title.includes(query)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Submit Grievance and save to localStorage
+        function submitComplaint(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('comp-name').value;
+            const phone = document.getElementById('comp-phone').value;
+            const village = document.getElementById('comp-village').value;
+            const cat = document.getElementById('comp-category').value;
+            const desc = document.getElementById('comp-desc').value;
+
+            // Generate mock tracking ID
+            const ticketId = 'SHIV-' + Math.floor(1000 + Math.random() * 9000);
+
+            const complaintObj = {
+                ticketId, name, phone, village, cat, desc, status: "Submitted / प्रलंबित", date: new Date().toLocaleDateString('mr-IN')
+            };
+
+            // Store inside LocalStorage array log
+            let complaints = JSON.parse(localStorage.getItem('shiv-complaints') || '[]');
+            complaints.push(complaintObj);
+            localStorage.setItem('shiv-complaints', JSON.stringify(complaints));
+
+            showToast(`तक्रार यशस्वीरित्या दाखल! तिकीट ID: ${ticketId}`, "success");
+            
+            // Clean Form fields
+            document.getElementById('complaint-form').reset();
+            updateComplaintLog();
+        }
+
+        // Update past complaint list
+        function updateComplaintLog() {
+            const logBox = document.getElementById('local-complaint-log');
+            let complaints = JSON.parse(localStorage.getItem('shiv-complaints') || '[]');
+            
+            if (complaints.length === 0) {
+                logBox.innerHTML = `<li class="italic text-gray-400">अद्याप कोणतीही स्थानिक तक्रार केलेली नाही.</li>`;
+                return;
+            }
+
+            logBox.innerHTML = complaints.map(c => `
+                <li class="border-b border-gray-200 dark:border-zinc-800 pb-2">
+                    <span class="font-bold text-saffron-500">${c.ticketId}</span> - ${c.date}
+                    <span class="block text-[10px] text-gray-400 mt-0.5">विषय: ${c.cat} | स्थिती: <strong class="text-amber-500">${c.status}</strong></span>
+                </li>
+            `).join('');
+        }
+
+        // Track grievance using Ticket ID search
+        function trackGrievance() {
+            const inputId = document.getElementById('track-id-input').value.toUpperCase().trim();
+            const resultBox = document.getElementById('tracking-result-box');
+            
+            let complaints = JSON.parse(localStorage.getItem('shiv-complaints') || '[]');
+            const found = complaints.find(c => c.ticketId === inputId);
+
+            resultBox.classList.remove('hidden');
+
+            if (found) {
+                resultBox.innerHTML = `
+                    <div class="space-y-1 text-slate-800 dark:text-zinc-100">
+                        <p class="font-bold text-saffron-600">तक्रार सापडली! (Record Found)</p>
+                        <p><strong>नाव:</strong> ${found.name}</p>
+                        <p><strong>दिनांक:</strong> ${found.date}</p>
+                        <p><strong>गाव:</strong> ${found.village}</p>
+                        <p><strong>स्थिती:</strong> <span class="px-2 py-0.5 rounded bg-amber-100 text-amber-700 font-bold">${found.status}</span></p>
+                        <p class="mt-2 text-gray-500">आमची निवारण समिती लवकरच तुमच्या संपर्कात येईल.</p>
+                    </div>
+                `;
+            } else {
+                resultBox.innerHTML = `
+                    <p class="text-red-500 font-bold">दिलेल्या कोडचे तिकीट आढळले नाही.</p>
+                    <p class="text-[10px] text-gray-400 mt-1">कृपया तिकीट आयडी बरोबर असल्याचे तपासा (उदा: SHIV-XXXX).</p>
+                `;
+            }
+        }
+
+        // Membership generator
+        function generateMemberCard(event) {
+            event.preventDefault();
+            const name = document.getElementById('member-name-input').value;
+            const phone = document.getElementById('member-phone-input').value;
+            const village = document.getElementById('member-village-input').value;
+            const blood = document.getElementById('member-blood-input').value;
+
+            // Dynamic member numeric code
+            const randId = 'SHIV-2026-' + Math.floor(1000 + Math.random() * 9000);
+
+            // Populate Card Preview elements
+            document.getElementById('card-name').innerText = name;
+            document.getElementById('card-village').innerText = village;
+            document.getElementById('card-blood').innerText = blood;
+            document.getElementById('card-id').innerText = randId;
+
+            showToast("डिजिटल सभासद कार्ड यशस्वीरित्या तयार केले!", "success");
+        }
+
+        // Trigger native document printing setup for card visual frame only
+        function printCard() {
+            const cardContent = document.getElementById('membership-card-visual').outerHTML;
+            const printWindow = window.open('', '', 'height=500, width=600');
+            printWindow.document.write('<html><head><title>Print Shivsena ID Card</title>');
+            printWindow.document.write('<script src="https://cdn.tailwindcss.com"></script>');
+            printWindow.document.write('</head><body class="flex items-center justify-center h-screen bg-slate-100">');
+            printWindow.document.write(cardContent);
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            
+            setTimeout(() => {
+                printWindow.print();
+            }, 800);
+        }
+
+        // Volunteer registrations submit handler
+        function submitVolunteer(event) {
+            event.preventDefault();
+            const name = document.getElementById('vol-name').value;
+            const t = document.getElementById('vol-taluka').value;
+            const interest = document.getElementById('vol-interest').value;
+
+            showToast(`धन्यवाद ${name}! तुमचे नाव स्वयंसेवक नोंदणीत जोडले गेले.`, "success");
+            document.getElementById('volunteer-form').reset();
+        }
+
+        // Contact generic message form submission
+        function submitContact(event) {
+            event.preventDefault();
+            const name = document.getElementById('con-name').value;
+            showToast(`नमस्कार ${name}, तुमचा संदेश पाठवला गेला आहे!`, "success");
+            document.getElementById('contact-form').reset();
+        }
+
+        // Lightbox image preview modals toggle logic
+        function openLightbox(imgSrc) {
+            const modal = document.getElementById('lightbox-modal');
+            const modalImg = document.getElementById('lightbox-img');
+            modalImg.src = imgSrc;
+            modal.classList.remove('hidden');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox-modal').classList.add('hidden');
+        }
+
+        // Accordion mechanism for FAQ questions
+        function toggleFAQ(id) {
+            const ans = document.getElementById(`faq-ans-${id}`);
+            const chevron = document.getElementById(`faq-chevron-${id}`);
+            if (ans.classList.contains('hidden')) {
+                ans.classList.remove('hidden');
+                chevron.style.transform = 'rotate(180deg)';
+            } else {
+                ans.classList.add('hidden');
+                chevron.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // Display toast notices
+        function showToast(message, type = "info") {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `p-4 rounded-xl shadow-lg text-white font-bold text-xs sm:text-sm flex items-center gap-2 transform transition-all duration-300 translate-y-10 pointer-events-auto bg-slate-900 border-l-4 border-saffron-500`;
+            
+            toast.innerHTML = `
+                <i class="fa-solid fa-circle-check text-saffron-500"></i>
+                <span>${message}</span>
+            `;
+
+            container.appendChild(toast);
+            
+            // Animate rise
+            setTimeout(() => {
+                toast.classList.remove('translate-y-10');
+            }, 50);
+
+            // Self cleanup
+            setTimeout(() => {
+                toast.classList.add('opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 4000);
+        }
+
+        // Scroll page tracking logic to control layout utilities
+        function handleWindowScroll() {
+            const btn = document.getElementById('scroll-top-btn');
+            if (window.scrollY > 400) {
+                btn.classList.remove('opacity-0', 'pointer-events-none');
+            } else {
+                btn.classList.add('opacity-0', 'pointer-events-none');
+            }
+        }
+
+        // Safe scroll utility
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Toggle Help Desk popup
+        function toggleHelplineOverlay() {
+            const modal = document.getElementById('helpline-overlay');
+            if (modal.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+            } else {
+                modal.classList.add('hidden');
+            }
+        }
+
+        // Cookie acceptance logic
+        function acceptCookies() {
+            localStorage.setItem('cookies-accepted', 'true');
+            document.getElementById('cookie-banner').classList.add('hidden');
+            showToast("कुकीज संमती मान्य केल्याबद्दल धन्यवाद!", "success");
+        }
+
+        function rejectCookies() {
+            document.getElementById('cookie-banner').classList.add('hidden');
+        }
+
+        // Random mock activity event generator logic to make portal feel organic and busy
+        function startMockEventLivestream() {
+            const firstNames = ["प्रशांत", "स्वाती", "दिनेश", "अनिकेत", "प्रतीक्षा", "संदीप", "तेजश्री"];
+            const locations = ["राधानगरी", "गारगोटी", "आजरा", "उत्त्युर", "सोळंकुर", "वाळवे"];
+            
+            setInterval(() => {
+                const name = firstNames[Math.floor(Math.random() * firstNames.length)];
+                const loc = locations[Math.floor(Math.random() * locations.length)];
+                showToast(`नवीन सदस्य: ${name} (${loc}) नुकतेच शिवसेना परिवारात जोडले गेले!`);
+            }, 35000); // Trigger every 35 seconds to keep it non-intrusive yet realistic
+        }
+    </script>
+</body>
+</html>
